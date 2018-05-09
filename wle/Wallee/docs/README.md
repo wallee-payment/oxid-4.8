@@ -1,6 +1,6 @@
 # OXID 4.8
 
-v1.0.0, 2018-48
+v1.0.1, 2018-5
 
 ## Prerequisites
 1. If you don't already have one, link:https://app-wallee.com/user/signup[create a wallee account], set up a space and sign up for an OXID account.
@@ -11,7 +11,7 @@ v1.0.0, 2018-48
 ## Installation
 
 1. Upload the extension files to your store's modules directory using FTP/SSH.
-	* If you are using OXID 6.x you can install the plugin using composer as an alternative: `composer require oxid/oxid-4.8`
+	* If you are using OXID 6.x you can install the plugin using composer as an alternative: `composer require wallee/oxid-4.8`
 2. Login to the backend of your OXID store.
 
 ## Configuration
