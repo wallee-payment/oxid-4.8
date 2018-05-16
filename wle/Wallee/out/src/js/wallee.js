@@ -5,8 +5,9 @@
         running: false,
 
         initialized: function () {
-            $('#orderConfirmAgbBottom  button[type="submit"]').removeAttr('disabled');
             $('#Wallee-iframe-spinner').hide();
+            $('#Wallee-iframe-container').show();
+            $('#orderConfirmAgbBottom  button[type="submit"]').removeAttr('disabled');
             $('#orderConfirmAgbBottom  button[type="submit"]').click(function (event) {
                 Wallee.handler.validate();
                 $('#orderConfirmAgbBottom  button[type="submit"]').attr('disabled', 'disabled');

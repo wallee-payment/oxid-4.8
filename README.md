@@ -1,6 +1,6 @@
 # OXID 4.8
 
-v1.0.1, 2018-5
+v1.0.2, 2018-5
 
 ## Prerequisites
 1. If you don't already have one, link:https://app-wallee.com/user/signup[create a wallee account], set up a space and sign up for an OXID account.
