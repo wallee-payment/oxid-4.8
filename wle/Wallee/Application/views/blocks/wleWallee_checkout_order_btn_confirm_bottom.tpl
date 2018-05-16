@@ -18,8 +18,8 @@ function initWalleeIframe(){
 }
 jQuery().ready(initWalleeIframe);
 [{/capture}]
-[{oxscript add=$WalleeInitScript} priority=10]
-[{oxscript include=$oView->getWalleeJavascriptUrl()} priority=8]
+[{oxscript add=$WalleeInitScript priority=10}]
+[{oxscript include=$oView->getWalleeJavascriptUrl() priority=8}]
 [{oxscript include=$oViewConf->getModuleUrl("wleWallee", "out/src/js/wallee.js") priority=9}]
 [{oxstyle include=$oViewConf->getModuleUrl("wleWallee", "out/src/css/spinner.css")}]
 [{/if}]
