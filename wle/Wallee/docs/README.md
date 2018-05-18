@@ -1,12 +1,12 @@
 # OXID 4.8
 
-v1.0.3, 2018-5
+v1.0.4, 2018-5
 
 ## Prerequisites
-1. If you don't already have one, link:https://app-wallee.com/user/signup[create a wallee account], set up a space and sign up for an OXID account.
+1. If you don't already have one, link:[create a wallee account](https://app-wallee.com/user/signup), set up a space and sign up for an OXID account.
 2. Create an application user that is allowed to access the space you want to link to the OXID store. Navigate to your wallee account > application user and create your application user. The user ID and the authentication key will be shown to you. Make sure to write this information down.
 3. Make sure that you grant the application users the necessary rights (Account Admin) in order to configure the webhooks, payment methods etc. out of your OXID store.
-4. Setup at least one processor, one payment method and a connector configuration. You can manually do this or step throught the wizard. More information about the processor concept can be found in the link:https://app-wallee.com/doc/payment/processor-concept[documentation].
+4. Setup at least one processor, one payment method and a connector configuration. You can manually do this or step throught the wizard. More information about the processor concept can be found in the link:[documentation](https://app-wallee.com/doc/payment/processor-concept).
 
 ## Installation
 
