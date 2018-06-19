@@ -157,7 +157,7 @@ class_exists('oxvoucher');        	$voucher = oxNew('oxvoucher');
     {
         $lineItem = new LineItemCreate();
         $lineItem->setName($basketItem->getTitle());
-        $lineItem->setUniqueId($basketItem->getProductId());
+        $lineItem->setUniqueId($basketItem->getProductId() . $basketItem->get);
         $lineItem->setSku($basketItem->getProductId());
         $lineItem->setQuantity($basketItem->getAmount());
 
@@ -173,7 +173,7 @@ class_exists('oxvoucher');        	$voucher = oxNew('oxvoucher');
         ));
         /** @noinspection PhpParamsInspection */
         $lineItem->setType(LineItemType::PRODUCT);
-
+        
         return $lineItem;
     }
 

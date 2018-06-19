@@ -3,6 +3,7 @@
         handler: null,
         methodConfigurationId: null,
         running: false,
+        loaded: false,
 
         initialized: function () {
             $('#Wallee-iframe-spinner').hide();
@@ -14,6 +15,13 @@
                 $('#orderConfirmAgbBottom  button[type="submit"]').attr('disabled', 'disabled');
                 return false;
             });
+            this.loaded = true;
+        },
+        
+        heightChanged: function () {
+        	if(this.loaded && $('#Wallee-iframe-container > iframe').height() == 0) {
+        		$('#Wallee-iframe-container').parent().parent().hide();
+        	}
         },
 
         submit: function () {
@@ -61,6 +69,7 @@
                     .IframeCheckoutHandler(methodConfigurationId);
                 Wallee.handler.setInitializeCallback(this.initialized);
                 Wallee.handler.setValidationCallback(this.validated);
+                Wallee.handler.setHeightChangeCallback(this.heightChanged);
                 Wallee.handler.create('Wallee-iframe-container');
             }
         },

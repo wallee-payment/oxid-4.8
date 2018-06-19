@@ -46,13 +46,7 @@ class SessionAdapter implements ITransactionServiceAdapter
         }
         $this->session = $session;
         $this->basketAdapter = new BasketAdapter($session->getBasket());
-
-        $useShipping = false;
-class_exists('oxaddress');        $shipping = oxNew('oxaddress');
-        if ($shipping->load($session->getVariable('deladrid'))) {
-            $useShipping = true;
-        }
-        $this->addressAdapter = new AddressAdapter($useShipping ? $shipping : null, $session->getUser());
+        $this->addressAdapter = new AddressAdapter($session->getUser()->getSelectedAddress(), $session->getUser());
     }
 
     public function getCreateData()
