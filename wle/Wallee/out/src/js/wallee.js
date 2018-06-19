@@ -9,8 +9,10 @@
             $('#Wallee-iframe-container').show();
             $('#orderConfirmAgbBottom  button[type="submit"]').removeAttr('disabled');
             $('#orderConfirmAgbBottom  button[type="submit"]').click(function (event) {
+            	event.preventDefault();
                 Wallee.handler.validate();
                 $('#orderConfirmAgbBottom  button[type="submit"]').attr('disabled', 'disabled');
+                return false;
             });
         },
 
