@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+				<link rel="canonical" href="https://plugin-documentation.wallee.com/wallee-payment/oxid-4.8/master/docs/en/documentation.html" />
+		<title>OXID 4.8</title>
+		<link href="assets/base.css" rel="stylesheet" />
+	</head>
+	<body class="documentation">
+		<div class="layout-wrapper">
+							<div class="layout-title">
+					<h1>OXID 4.8</h1>
+<h2>Documentation</h2>				</div>
+										<div class="layout-navigation">
+					<ul class="nav">
+	<li>
+		<a href="https://app-wallee.com/user/signup">
+			Sign Up
+		</a>
+	</li>
+	<li>
+		<a href="https://github.com/wallee-payment/oxid-4.8/releases/tag/1.0.7/">
+			Source
+		</a>
+	</li>
+</ul>				</div>
+										<div class="layout-content">
+												<div class="col-body">
+							<div class="col-body-wrapper">
+																	<div class="body-container">
+																						<div class="chapter" id="_prerequisites">
+	<div class="chapter-title">
+		<h1>
+			<span class="title-number">1</span>Prerequisites					</h1>
+	</div>
+	<div class="chapter-body">
+					<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>If you don&#8217;t already have one, <a href="https://app-wallee.com/user/signup">create a wallee account</a>, set up a space and sign up for an OXID account.</p>
+</li>
+<li>
+<p>Create an application user that is allowed to access the space you want to link to the OXID store. Navigate to your wallee account &gt; application user and create your application user. The user ID and the authentication key will be shown to you. Make sure to write this information down.</p>
+</li>
+<li>
+<p>Make sure that you grant the application users the necessary rights (Account Admin) in order to configure the webhooks, payment methods etc. out of your OXID store.</p>
+</li>
+<li>
+<p>Setup at least one processor, one payment method and a connector configuration. You can manually do this or step throught the wizard. More information about the processor concept can be found in the <a href="https://app-wallee.com/doc/payment/processor-concept">documentation</a>.</p>
+</li>
+</ol>
+</div>					</div>
+</div>	<div class="chapter" id="_installation">
+	<div class="chapter-title">
+		<h1>
+			<span class="title-number">2</span>Installation					</h1>
+	</div>
+	<div class="chapter-body">
+					<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://github.com/wallee-payment/oxid-4.8/releases/tag/1.0.7/">Download</a> the extension (wallee.zip).</p>
+</li>
+<li>
+<p>Upload the extension files to your store&#8217;s modules directory using FTP/SSH.</p>
+</li>
+<li>
+<p>Login to the backend of your OXID store and activate the plugin.</p>
+</li>
+</ol>
+</div><div class="paragraph">
+<p>You may wish to install the following extensions to enhance your and your customers experience:</p>
+</div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://github.com/wallee-payment/Oxid-FrontendOrderList">Restrict customer order overview based on transaction status.</a></p>
+</li>
+<li>
+<p><a href="https://github.com/wallee-payment/Oxid-OrderListStatus">Restrict &amp; sort admin order overview based on transaction status.</a></p>
+</li>
+</ol>
+</div>					</div>
+</div>	<div class="chapter" id="_configuration">
+	<div class="chapter-title">
+		<h1>
+			<span class="title-number">3</span>Configuration					</h1>
+	</div>
+	<div class="chapter-body">
+					<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to Extensions &gt; Modules &gt; WLE :: wallee in your Oxid backend and activate the module.</p>
+</li>
+<li>
+<p>Switch to the settings of the activated module and enter your previously created wallee credentials.</p>
+</li>
+<li>
+<p>If you are using EE with multistore, the settings under <em>Global Settings</em> are shared over all stores. You may use different spaces to configure different behaviours.
+<span class="image"><img src="resource/settings.png" alt="Payment configuration"/></span></p>
+</li>
+<li>
+<p>After saving the configuration, the payment methods settings are synchronized between wallee and your OXID store, including webhooks and payment methods.
+NOTE: Payment methods will not be immediately available in your store, see <a href="#activate-payment-methods">Activate Payment Methods</a></p>
+</li>
+<li>
+<p>Optionally disable downloading invoice and packing slip. These settings enable customers to download the documents from their order overview in the OXID frontend.</p>
+</li>
+<li>
+<p>Optionally change the debug level which increases what information is logged in your /logs folder.</p>
+</li>
+</ol>
+</div>							<div class="section" id="_payment_method_configuration">
+	<div class="section-title">
+		<h2>
+			<span class="title-number">3.1</span>Payment Method Configuration					</h2>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p>All settings configured in wallee will be synchronized to the store. This includes translations, provided the languages are supported by the OXID store. These settings may be overwritten, which will affect the OXID store but not the wallee configurations.</p>
+</div>							<div class="section" id="_activate_payment_methods">
+	<div class="section-title">
+		<h3>
+			<span class="title-number">3.1.1</span>Activate Payment Methods					</h3>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p><a id="activate-payment-methods"></a></p>
+</div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to Shop Settings &gt; Shipping Methods and select the shipping method where the payment method(s) should be available.</p>
+</li>
+<li>
+<p>Switch to the <em>Payment</em> tab, and select <em>Assign Payment Methods</em></p>
+</li>
+<li>
+<p>Drag the wallee payment methods which should be available into the right column.</p>
+</li>
+</ol>
+</div>					</div>
+</div>			</div>
+</div>			</div>
+</div>	<div class="chapter" id="_features">
+	<div class="chapter-title">
+		<h1>
+			<span class="title-number">4</span>Features					</h1>
+	</div>
+	<div class="chapter-body">
+					<div class="paragraph">
+<p>Here we will list the features which merchants may interact with in their OXID store.</p>
+</div>							<div class="section" id="_transaction_overview">
+	<div class="section-title">
+		<h2>
+			<span class="title-number">4.1</span>Transaction overview					</h2>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p>From the OXID backend order list you can view different information regarding the transaction. This includes standard information such as the current transaction state, the amount, the used payment method and a link to the transaction in the wallee backend.
+Additionally, you are able to download transaction relevant documents such as the invoice or packing slip.</p>
+</div>							<div class="section" id="_completion">
+	<div class="section-title">
+		<h3>
+			<span class="title-number">4.1.1</span>Completion					</h3>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p>Depending on the payment connector configuration the transaction must be completed manually. This button will appear in the transaction overview if the transaction is in the correct state.</p>
+</div>					</div>
+</div>					<div class="section" id="_void">
+	<div class="section-title">
+		<h3>
+			<span class="title-number">4.1.2</span>Void					</h3>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p>Depending on the payment connector configuration the transaction must be completed manually. If for some reason you wish not to complete the transaction (fraud, stock management, etc.), you may initiate a void instead of a completion. This button will appear in the transaction overview if the transaction is in the correct state.</p>
+</div>					</div>
+</div>					<div class="section" id="_refund">
+	<div class="section-title">
+		<h3>
+			<span class="title-number">4.1.3</span>Refund					</h3>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p>Once a transaction has been completed you may wish to refund part of or the whole transaction.</p>
+</div><div class="paragraph">
+<p>The refunds work using reductions. You may either refund line items by quantity, or reduce the amount paid.</p>
+</div><div class="paragraph">
+<p><span class="image"><img src="resource/refund.png" alt="Refund"/></span></p>
+</div>					</div>
+</div>			</div>
+</div>					<div class="section" id="_manual_tasks">
+	<div class="section-title">
+		<h2>
+			<span class="title-number">4.2</span>Manual Tasks					</h2>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p>wallee can be configured so that certain actions or states result in <em>Manual Tasks</em>. If any such <em>Manual Tasks</em> occur, you will generally be notified by email. Additionally, we will display the number of open <em>Manual Tasks</em> in your OXID backend in the header area.</p>
+</div><div class="paragraph">
+<p><span class="image"><img src="resource/manual_task.png" alt="Manual Task"/></span></p>
+</div>					</div>
+</div>					<div class="section" id="_transaction_documents">
+	<div class="section-title">
+		<h2>
+			<span class="title-number">4.3</span>Transaction Documents					</h2>
+	</div>
+	<div class="section-body">
+					<div class="paragraph">
+<p>Depending on the configurations customers are able to download their invoice and packing slips from the order overview. As a merchant you can access these through the transaction overview.</p>
+</div>					</div>
+</div>			</div>
+</div>																			</div>
+															</div>
+						</div>
+						<div class="col-right">
+		<div class="col-right-wrapper">
+							<div class="table-of-contents">
+	<ul class="nav">
+					<li class="nav-level-1">
+	<a href="#_prerequisites">
+		<span class="item-number">1</span>
+		<span class="item-title">Prerequisites</span>
+			</a>
+    </li>					<li class="nav-level-1">
+	<a href="#_installation">
+		<span class="item-number">2</span>
+		<span class="item-title">Installation</span>
+			</a>
+    </li>					<li class="nav-level-1">
+	<a href="#_configuration">
+		<span class="item-number">3</span>
+		<span class="item-title">Configuration</span>
+			</a>
+        	<ul  class="nav">
+    		    			<li class="nav-level-2">
+	<a href="#_payment_method_configuration">
+		<span class="item-number">3.1</span>
+		<span class="item-title">Payment Method Configuration</span>
+			</a>
+        	<ul  class="nav">
+    		    			<li class="nav-level-3">
+	<a href="#_activate_payment_methods">
+		<span class="item-number">3.1.1</span>
+		<span class="item-title">Activate Payment Methods</span>
+			</a>
+    </li>    		    	</ul>
+    </li>    		    	</ul>
+    </li>					<li class="nav-level-1">
+	<a href="#_features">
+		<span class="item-number">4</span>
+		<span class="item-title">Features</span>
+			</a>
+        	<ul  class="nav">
+    		    			<li class="nav-level-2">
+	<a href="#_transaction_overview">
+		<span class="item-number">4.1</span>
+		<span class="item-title">Transaction overview</span>
+			</a>
+        	<ul  class="nav">
+    		    			<li class="nav-level-3">
+	<a href="#_completion">
+		<span class="item-number">4.1.1</span>
+		<span class="item-title">Completion</span>
+			</a>
+    </li>    		    			<li class="nav-level-3">
+	<a href="#_void">
+		<span class="item-number">4.1.2</span>
+		<span class="item-title">Void</span>
+			</a>
+    </li>    		    			<li class="nav-level-3">
+	<a href="#_refund">
+		<span class="item-number">4.1.3</span>
+		<span class="item-title">Refund</span>
+			</a>
+    </li>    		    	</ul>
+    </li>    		    			<li class="nav-level-2">
+	<a href="#_manual_tasks">
+		<span class="item-number">4.2</span>
+		<span class="item-title">Manual Tasks</span>
+			</a>
+    </li>    		    			<li class="nav-level-2">
+	<a href="#_transaction_documents">
+		<span class="item-number">4.3</span>
+		<span class="item-title">Transaction Documents</span>
+			</a>
+    </li>    		    	</ul>
+    </li>			</ul>
+</div>					</div>
+	</div>
+				</div>
+					</div>
+
+		<script type="text/javascript" src="assets/jquery.js"></script>
+		<script type="text/javascript" src="assets/scrollspy.js"></script>
+		<script type="text/javascript" src="assets/sticky-kit.js"></script>
+		<script type="text/javascript" src="assets/base.js"></script>
+	</body>
+</html>
