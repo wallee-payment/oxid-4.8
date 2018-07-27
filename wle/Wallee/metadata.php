@@ -31,7 +31,7 @@ $aModule = array(
         'en' => 'WLE Wallee Module'
     ),
     'thumbnail' => 'out/pictures/picture.png',
-    'version' => '1.0.7',
+    'version' => '1.0.8',
     'author' => 'customweb GmbH',
     'url' => 'https://www.customweb.com',
     'email' => 'info@customweb.com',
@@ -93,50 +93,50 @@ $aModule = array(
     	),
     ),
     'settings' => array(
+    	array(
+    		'group' => 'wleWalleewalleeSettings',
+    		'name' => 'wleWalleeSpaceId',
+    		'type' => 'str',
+    		'value' => ''
+    	),
         array(
-            'group' => 'wleWalleeGlobalSettings',
-            'name' => 'wleWalleeAppKey',
-            'type' => 'str',
-            'value' => ''
-        ),
-        array(
-            'group' => 'wleWalleeGlobalSettings',
+            'group' => 'wleWalleewalleeSettings',
             'name' => 'wleWalleeUserId',
             'type' => 'str',
             'value' => ''
         ),
+    	array(
+    		'group' => 'wleWalleewalleeSettings',
+    		'name' => 'wleWalleeAppKey',
+    		'type' => 'str',
+    		'value' => ''
+    	),
         array(
-            'group' => 'wleWalleeSettings',
-            'name' => 'wleWalleeSpaceId',
-            'type' => 'str',
-            'value' => ''
-        ),
-        array(
-            'group' => 'wleWalleeSettings',
+            'group' => 'wleWalleewalleeSettings',
             'name' => 'wleWalleeSpaceViewId',
             'type' => 'str',
             'value' => ''
         ),
         array(
-            'group' => 'wleWalleeSettings',
+            'group' => 'wleWalleeShopSettings',
             'name' => 'wleWalleeEmailConfirm',
             'type' => 'bool',
             'value' => true
         ),
         array(
-            'group' => 'wleWalleeSettings',
+            'group' => 'wleWalleeShopSettings',
             'name' => 'wleWalleeInvoiceDoc',
             'type' => 'bool',
             'value' => true
         ),
         array(
-            'group' => 'wleWalleeSettings',
+            'group' => 'wleWalleeShopSettings',
             'name' => 'wleWalleePackingDoc',
             'type' => 'bool',
             'value' => true
         ),
         array(
-            'group' => 'wleWalleeSettings',
+            'group' => 'wleWalleeShopSettings',
             'name' => 'wleWalleeLogLevel',
             'type' => 'select',
             'value' => 'Error',

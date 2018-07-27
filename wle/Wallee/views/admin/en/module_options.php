@@ -14,9 +14,9 @@ $aLang = array(
     'charset' => 'UTF-8',
     'wleWallee' => 'WLE Wallee',
 
-    'SHOP_MODULE_GROUP_wleWalleeSettings' => 'Shop settings',
-    'SHOP_MODULE_GROUP_wleWalleeGlobalSettings' => 'Global settings',
-    'SHOP_MODULE_wleWalleeAppKey' => 'App Key',
+	'SHOP_MODULE_GROUP_wleWalleewalleeSettings' => 'wallee Settings',
+	'SHOP_MODULE_GROUP_wleWalleeShopSettings' => 'Shop Settings',
+	'SHOP_MODULE_wleWalleeAppKey' => 'Authentication Key',
     'SHOP_MODULE_wleWalleeUserId' => 'User Id',
     'SHOP_MODULE_wleWalleeSpaceId' => 'Space Id',
     'SHOP_MODULE_wleWalleeSpaceViewId' => 'Space View Id',
