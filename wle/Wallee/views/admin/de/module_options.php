@@ -17,11 +17,12 @@ $aLang = array(
     'wleWallee' => 'WLE Wallee',
 
     'SHOP_MODULE_GROUP_wleWalleewalleeSettings' => 'wallee Einstellungen',
-    'SHOP_MODULE_GROUP_wleWalleeShopSettings' => 'Shop Einstellungen',
+	'SHOP_MODULE_GROUP_wleWalleeShopSettings' => 'Shop Einstellungen',
+	'SHOP_MODULE_GROUP_wleWalleeSpaceViewId' => 'Space View Id',
     'SHOP_MODULE_wleWalleeAppKey' => 'Authentication Key',
-    'SHOP_MODULE_wleWalleeUserId' => 'Benutzer Id',
+	'SHOP_MODULE_wleWalleeUserId' => 'Benutzer Id',
     'SHOP_MODULE_wleWalleeSpaceId' => 'Space Id',
-    'SHOP_MODULE_wleWalleeSpaceViewId' => 'Space View Id',
+	'SHOP_MODULE_wleWalleeSpaceViewSettings' => 'Space View Optionen',
     'SHOP_MODULE_wleWalleeEmailConfirm' => 'Email Bestätigung',
     'SHOP_MODULE_wleWalleeInvoiceDoc' => 'Rechnung',
     'SHOP_MODULE_wleWalleePackingDoc' => 'Lieferschein',
@@ -30,7 +31,16 @@ $aLang = array(
     'SHOP_MODULE_wleWalleeLogLevel_Error' => 'Error',
     'SHOP_MODULE_wleWalleeLogLevel_Debug' => 'Debug',
     'SHOP_MODULE_wleWalleeLogLevel_Info' => 'Info',
-
+	
+	'HELP_SHOP_MODULE_wleWalleeUserId' => 'Der Benutzer benötigt volle Berechtigungen auf dem verbundenen space.',
+	'HELP_SHOP_MODULE_wleWalleeSpaceViewId' => 'Die Space View ID lässt das Gestalten der Zahlungsformulare und -seiten innerhalb eines Spaces. Dies kann u.A. für Multishopsysteme die unterschiedliche Aussehen haben sollten verwendet werden.',	'HELP_SHOP_MODULE_wleWalleeEmailConfirm' => 'You may deactivate the OXID order confirmation email for wallee transactions.',
+	'HELP_SHOP_MODULE_wleWalleeInvoiceDoc' => 'Sie können ihren Kunden erlauben Rechnungen für Ihre Bestellungen im Frontend-Bereich herunterzuladen.',
+	'HELP_SHOP_MODULE_wleWalleePackingDoc' => 'Sie können ihren Kunden erlauben Lieferscheine für Ihre Bestellungen im Frontend-Bereich herunterzuladen.',
+	'HELP_SHOP_MODULE_wleWalleeEmailConfirm' => 'Sie können OXID Bestellbestätigungen für wallee Transaktionen unterbinden.',
+	
+	'wle_wallee_Settings saved successfully.' => 'Die Einstellungen wurden erfolgreich gespeichert.',
+	'wle_wallee_Payment methods successfully synchronized.' => 'Die Zahlarten wurden synchronisiert.',
+	'wle_wallee_Webhook URL updated.' => 'Webhook URL wurde aktualisiert.',
 	//TODO remove unneeded
 	
 	'wle_wallee_Download Invoice' => 'Rechnung herunterladen',

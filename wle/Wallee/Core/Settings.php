@@ -82,16 +82,15 @@ class Settings {
 	}
 
 	public function getMigration() {
-        $level = $this->getSetting('Migration');
-        if(!$level) {
+		$level = \oxregistry::getConfig()->getShopConfVar('wleWalleeMigration', \oxregistry::getConfig()->getBaseShopId(),\oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
+		if(!$level) {
             $level = 0;
         }
         return $level;
     }
 
     public function setMigration($level) {
-        // save config directly
-    	\oxregistry::getConfig()->saveShopConfVar('int', 'wleWalleeMigration', $level);
+    	\oxregistry::getConfig()->saveShopConfVar('num', 'wleWalleeMigration', $level, \oxregistry::getConfig()->getBaseShopId(), \oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
     }
 
 	protected function getLogLevel(){
@@ -121,19 +120,19 @@ class Settings {
     }
 
 	public function getWebhookUrl() {
-	    return $this->getSetting('WebhookUrl');
+		return \oxregistry::getConfig()->getShopConfVar('wleWalleeWebhook', \oxregistry::getConfig()->getBaseShopId(),\oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
     }
 
     public function setWebhookUrl($value) {
-    	\oxregistry::getConfig()->saveShopConfVar('string', 'wleWalleeWebhook', $value);
+    	\oxregistry::getConfig()->saveShopConfVar('string', 'wleWalleeWebhook', $value, \oxregistry::getConfig()->getBaseShopId(), \oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
     }
 
     public function setGlobalParameters($shopId = null) {
     	$appKey = \oxregistry::getConfig()->getShopConfVar('wleWalleeAppKey', $shopId, \oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
     	$userId = \oxregistry::getConfig()->getShopConfVar('wleWalleeUserId', $shopId, \oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
-	    foreach(\oxregistry::getConfig()->getShopIds() as $shop) {
+    	foreach(\oxregistry::getConfig()->getShopIds() as $shop) {
 	    	\oxregistry::getConfig()->saveShopConfVar('str', 'wleWalleeAppKey', $appKey, $shop, \oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
 	    	\oxregistry::getConfig()->saveShopConfVar('str', 'wleWalleeUserId', $userId, $shop, \oxconfig::OXMODULE_MODULE_PREFIX . WalleeModule::instance()->getId());
-        }
+    	}
     }
 }

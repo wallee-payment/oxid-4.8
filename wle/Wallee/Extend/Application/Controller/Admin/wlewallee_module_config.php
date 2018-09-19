@@ -42,12 +42,14 @@ class wlewallee_module_config extends wlewallee_module_config_parent
         $this->_ModuleConfiguration_saveConfVars_parent();
         if ($this->getEditObjectId() == WalleeModule::instance()->getId()) {
             try {
-                WalleeModule::settings()->setGlobalParameters();
+            	WalleeModule::settings()->setGlobalParameters();
+            	WalleeModule::addMessage(WalleeModule::instance()->translate("Settings saved successfully."));
                 // force api client refresh
                 WalleeModule::instance()->getApiClient(true);
 
                 $paymentService = new PaymentService();
                 $paymentService->synchronize();
+                WalleeModule::addMessage(WalleeModule::instance()->translate("Payment methods successfully synchronized."));
 
                 $oldUrl = WalleeModule::settings()->getWebhookUrl();
                 $newUrl = WalleeModule::instance()->createWebhookUrl();
@@ -56,6 +58,7 @@ class wlewallee_module_config extends wlewallee_module_config_parent
                     $webhookService->uninstall(WalleeModule::settings()->getSpaceId(), $oldUrl);;
                     $webhookService->install(WalleeModule::settings()->getSpaceId(), $newUrl);
                     WalleeModule::settings()->setWebhookUrl($newUrl);
+                    WalleeModule::addMessage(WalleeModule::instance()->translate("Webhook URL updated successfully."));
                 }
             } catch (\Exception $e) {
                 WalleeModule::log(Logger::ERROR, "Unable to synchronize settings: {$e->getMessage()}.");

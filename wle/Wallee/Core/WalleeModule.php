@@ -148,6 +148,14 @@ class WalleeModule extends \oxmodule
     
     /**
      *
+     * @return \oxutils
+     */
+    public static function getUtils() {
+    	return \oxregistry::getUtils();
+    }
+    
+    /**
+     *
      * @return \oxutilsobject
      */
     public static function getUtilsObject() {
@@ -166,6 +174,16 @@ class WalleeModule extends \oxmodule
     		return \oxregistry::getUtilsView();
     	}
     	return \oxregistry::get('oxutilsview');
+    }
+    
+    /**
+     * Adds a message to the next rendered page.
+     * (Currently creates an error message)
+     * 
+     * @param string $message
+     */
+    public static function addMessage($message) {
+    	self::getUtilsView()->addErrorToDisplay($message);
     }
     
     public static function instance()
@@ -216,7 +234,6 @@ class WalleeModule extends \oxmodule
      */
     public static function onActivate()
     {
-    	self::log(Logger::ERROR, __METHOD__);
         $bool = 0;
         $bool += self::_dbEvent('install.sql', 'Error activating module: ');
         $bool += self::migrate();

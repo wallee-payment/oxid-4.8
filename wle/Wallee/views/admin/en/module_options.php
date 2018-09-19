@@ -13,21 +13,32 @@ $sLangName = 'English';
 $aLang = array(
     'charset' => 'UTF-8',
     'wleWallee' => 'WLE Wallee',
-
+	
 	'SHOP_MODULE_GROUP_wleWalleewalleeSettings' => 'wallee Settings',
 	'SHOP_MODULE_GROUP_wleWalleeShopSettings' => 'Shop Settings',
+	'SHOP_MODULE_GROUP_wleWalleeSpaceViewSettings' => 'Space View Options',
 	'SHOP_MODULE_wleWalleeAppKey' => 'Authentication Key',
-    'SHOP_MODULE_wleWalleeUserId' => 'User Id',
+	'SHOP_MODULE_wleWalleeUserId' => 'User Id',
     'SHOP_MODULE_wleWalleeSpaceId' => 'Space Id',
-    'SHOP_MODULE_wleWalleeSpaceViewId' => 'Space View Id',
-    'SHOP_MODULE_wleWalleeEmailConfirm' => 'Email Confirm',
-    'SHOP_MODULE_wleWalleeInvoiceDoc' => 'Invoice Doc',
-    'SHOP_MODULE_wleWalleePackingDoc' => 'Packing Doc',
+	'SHOP_MODULE_wleWalleeSpaceViewId' => 'Space View Id',
+	'SHOP_MODULE_wleWalleeEmailConfirm' => 'Email Confirm',
+	'SHOP_MODULE_wleWalleeInvoiceDoc' => 'Invoice Doc',
+	'SHOP_MODULE_wleWalleePackingDoc' => 'Packing Doc',
     'SHOP_MODULE_wleWalleeLogLevel' => 'Log Level',
     'SHOP_MODULE_wleWalleeLogLevel_' => ' - ',
     'SHOP_MODULE_wleWalleeLogLevel_Error' => 'Error',
     'SHOP_MODULE_wleWalleeLogLevel_Debug' => 'Debug',
-    'SHOP_MODULE_wleWalleeLogLevel_Info' => 'Info',
+	'SHOP_MODULE_wleWalleeLogLevel_Info' => 'Info',
+	
+	'HELP_SHOP_MODULE_wleWalleeUserId' => 'The user requires full permission in the space the shop is linked to.',
+	'HELP_SHOP_MODULE_wleWalleeSpaceViewId' => 'The space view ID allows to control the styling of the payment form and the payment page within the space. In multi shop setups it allows to adapt the payment form to different styling per sub store without requiring a dedicated space.',
+	'HELP_SHOP_MODULE_wleWalleeEmailConfirm' => 'You may deactivate the OXID order confirmation email for wallee transactions.',
+	'HELP_SHOP_MODULE_wleWalleeInvoiceDoc' => 'You may allow customers to download invoices in their account area.',
+	'HELP_SHOP_MODULE_wleWalleePackingDoc' => 'You may allow customers to download packing slips in their account area.',
+	
+	'wle_wallee_Settings saved successfully.' => 'Settings saved successfully.',
+	'wle_wallee_Payment methods successfully synchronized.' => 'Payment methods successfully synchronized.',
+	'wle_wallee_Webhook URL updated.' => 'Webhook URL updated.',
 	//TODO remove uneeded
 	
 	'wle_wallee_Download Invoice' => 'Download Invoice',

@@ -25,7 +25,7 @@ use Wle\Wallee\Core\WalleeModule;
  */
 abstract class AbstractJob extends \oxbase
 {
-	protected $_aSkipSaveFields = ['oxtimestamp', 'WLEUPDATED'];
+	protected $_aSkipSaveFields = ['oxtimestamp', 'wleupdated'];
     private $sdkObject;
 
     /**

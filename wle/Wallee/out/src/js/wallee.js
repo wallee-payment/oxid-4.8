@@ -4,6 +4,8 @@
         methodConfigurationId: null,
         running: false,
         loaded: false,
+        initCalls: 0,
+        initMaxCalls: 10,
 
         initialized: function () {
             $('#Wallee-iframe-spinner').hide();
@@ -16,6 +18,12 @@
                 return false;
             });
             this.loaded = true;
+            $('[name=Wallee-iframe-loaded').attr('value', 'true');
+        },
+        
+        fallback: function() {
+        	$('#Wallee-payment-information').toggle();
+        	$('#orderConfirmAgbBottom  button[type="submit"]').removeAttr('disabled');
         },
         
         heightChanged: function () {
@@ -35,7 +43,8 @@
             $.getJSON('index.php?cl=order&fnc=wleConfirm' + params, '', function (data, status, jqXHR) {
                 if (data.status) {
                     Wallee.handler.submit();
-                } else {
+                }
+                else {
                     Wallee.addError(data.message);
                     $('#orderConfirmAgbBottom  button[type="submit"]').removeAttr('disabled');
                 }
@@ -59,10 +68,15 @@
         },
 
         init: function (methodConfigurationId) {
+        	this.initCalls++;
             if (typeof window.IframeCheckoutHandler === 'undefined') {
-                setTimeout(function () {
-                    Wallee.init(methodConfigurationId);
-                }, 500);
+            	if(this.initCalls < this.initMaxCalls) {
+	                setTimeout(function () {
+	                    Wallee.init(methodConfigurationId);
+	                }, 500);
+            	} else {
+            		this.fallback();
+            	}
             } else {
                 Wallee.methodConfigurationId = methodConfigurationId;
                 Wallee.handler = window
