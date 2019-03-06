@@ -119,20 +119,23 @@ class WalleeModule extends \oxmodule
 
         die(json_encode($json));
     }
-
-    public static function getControllerUrl($controller, $action = null, $oxid = null)
+    
+    public static function getControllerUrl($controller, $action = null, $oxid = null, $utmNoOverride = null)
     {
     	$baseUrl = \oxregistry::getConfig()->getShopUrl();
-        $params = array(
-            'cl' => $controller
-        );
-        if ($action) {
-            $params['fnc'] = $action;
-        }
-        if ($oxid) {
-        	$params['oxid'] = $oxid;
-        }
-        return self::getUtilsUrl()->cleanUrlParams(self::getUtilsUrl()->appendUrl($baseUrl, $params), '&');
+    	$params = array(
+    		'cl' => $controller
+    	);
+    	if ($action) {
+    		$params['fnc'] = $action;
+    	}
+    	if ($oxid) {
+    		$params['oxid'] = $oxid;
+    	}
+    	if($utmNoOverride !== null) {
+    		$params['utm_nooverride'] = $utmNoOverride;
+    	}
+    	return self::getUtilsUrl()->cleanUrlParams(self::getUtilsUrl()->appendUrl($baseUrl, $params), '&');
     }
     
     /**

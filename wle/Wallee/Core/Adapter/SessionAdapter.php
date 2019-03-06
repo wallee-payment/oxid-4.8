@@ -64,7 +64,7 @@ class SessionAdapter implements ITransactionServiceAdapter {
 		
 		if ($transaction->getOrderId()) {
 			$transactionPending->setFailedUrl(
-					WalleeModule::getControllerUrl('order', 'wleError', $transaction->getOrderId()));
+					WalleeModule::getControllerUrl('order', 'wleError', $transaction->getOrderId(), true));
 class_exists('oxorder');			$order = oxNew('oxorder');
 			/* @var $order \oxorder */
 			if ($order->load($transaction->getOrderId())) {
@@ -90,7 +90,7 @@ class_exists('oxorder');			$order = oxNew('oxorder');
 		$transaction->setBillingAddress($this->addressAdapter->getBillingAddressData());
 		$transaction->setShippingAddress($this->addressAdapter->getShippingAddressData());
 		$transaction->setLanguage(\oxregistry::getLang()->getLanguageAbbr());
-		$transaction->setSuccessUrl(WalleeModule::getControllerUrl('thankyou'));
-		$transaction->setFailedUrl(WalleeModule::getControllerUrl('order', 'wleError'));
+		$transaction->setSuccessUrl(WalleeModule::getControllerUrl('thankyou', null, null, true));
+		$transaction->setFailedUrl(WalleeModule::getControllerUrl('order', 'wleError', null, true));
 	}
 }
