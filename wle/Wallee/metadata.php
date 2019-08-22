@@ -31,7 +31,7 @@ $aModule = array(
         'en' => 'WLE Wallee Module'
     ),
     'thumbnail' => 'out/pictures/picture.png',
-    'version' => '1.0.12',
+    'version' => '1.0.13',
     'author' => 'customweb GmbH',
     'url' => 'https://www.customweb.com',
     'email' => 'info@customweb.com',
@@ -56,7 +56,6 @@ $aModule = array(
 		'wle_wallee_Transaction' => 'wle/Wallee/Application/Controller/Admin/wle_wallee_Transaction.php',
     ),
     'templates' => array(
-    	'wleWalleeCheckoutBasket.tpl' => 'wle/Wallee/Application/views/pages/wleWalleeCheckoutBasket.tpl',
         'wleWalleeCheckoutBasket.tpl' => 'wle/Wallee/Application/views/pages/wleWalleeCheckoutBasket.tpl',
         'wleWalleeCron.tpl' => 'wle/Wallee/Application/views/pages/wleWalleeCron.tpl',
         'wleWalleeError.tpl' => 'wle/Wallee/Application/views/pages/wleWalleeError.tpl',

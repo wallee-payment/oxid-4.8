@@ -49,6 +49,7 @@ $aLang = array(
 	'wle_wallee_Open in your wallee backend.' => 'Öffne im wallee backend.',
 	'wle_wallee_Open' => 'Öffnen',
 	'wle_wallee_wallee Link' => 'wallee Link',
+	'wle_wallee_You must agree to the terms and conditions.' => 'Sie müssen den AGBs und Datenschutzvereinbarung zustimmen.',
 	
 	// tpl translations
 	'wle_wallee_Restock' => 'Lagerbestand wiederherstellen',

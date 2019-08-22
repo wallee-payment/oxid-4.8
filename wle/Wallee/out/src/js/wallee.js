@@ -31,6 +31,17 @@
         		$('#Wallee-iframe-container').parent().parent().hide();
         	}
         },
+        
+        getAgbParameter: function() {
+            var agb = $('#checkAgbTop');
+            if(!agb.length) {
+                agb = $('#checkAgbBottom');
+            }
+            if(agb.length && agb[0].checked) {
+                return '&ord_agb=1';
+            }
+            return '';
+        },
 
         submit: function () {
             if (Wallee.running) {
@@ -40,6 +51,7 @@
             var params = '&stoken=' + $('input[name=stoken]').val();
             params += '&sDeliveryAddressMD5=' + $('input[name=sDeliveryAddressMD5]').val();
             params += '&challenge=' + $('input[name=challenge]').val();
+            params += this.getAgbParameter(),
             $.getJSON('index.php?cl=order&fnc=wleConfirm' + params, '', function (data, status, jqXHR) {
                 if (data.status) {
                     Wallee.handler.submit();

@@ -49,6 +49,7 @@ $aLang = array(
 	'wle_wallee_Open in your wallee backend.' => 'Open in your wallee backend.',
 	'wle_wallee_Open' => 'Open',
 	'wle_wallee_wallee Link' => 'wallee Link',
+	'wle_wallee_You must agree to the terms and conditions.' => 'You must agree to the terms and conditions.',
 	
 	// tpl translations
 	'wle_wallee_Restock' => 'Restock',

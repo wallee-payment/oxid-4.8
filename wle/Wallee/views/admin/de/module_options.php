@@ -18,11 +18,11 @@ $aLang = array(
 
     'SHOP_MODULE_GROUP_wleWalleewalleeSettings' => 'wallee Einstellungen',
 	'SHOP_MODULE_GROUP_wleWalleeShopSettings' => 'Shop Einstellungen',
-	'SHOP_MODULE_GROUP_wleWalleeSpaceViewId' => 'Space View Id',
+	'SHOP_MODULE_GROUP_wleWalleeSpaceSettings' => 'Space View Id',
     'SHOP_MODULE_wleWalleeAppKey' => 'Authentication Key',
 	'SHOP_MODULE_wleWalleeUserId' => 'Benutzer Id',
     'SHOP_MODULE_wleWalleeSpaceId' => 'Space Id',
-	'SHOP_MODULE_wleWalleeSpaceViewSettings' => 'Space View Optionen',
+	'SHOP_MODULE_wleWalleeSpaceViewViewId' => 'Space View Optionen',
     'SHOP_MODULE_wleWalleeEmailConfirm' => 'Email Bestätigung',
     'SHOP_MODULE_wleWalleeInvoiceDoc' => 'Rechnung',
     'SHOP_MODULE_wleWalleePackingDoc' => 'Lieferschein',
