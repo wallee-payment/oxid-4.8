@@ -1,10 +1,8 @@
 <?php
 /**
- * wallee SDK
+ *  SDK
  *
- * This library allows to interact with the wallee payment service.
- * wallee SDK: 1.0.0
- * 
+ * This library allows to interact with the  payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +17,7 @@
  * limitations under the License.
  */
 
+
 namespace Wallee\Sdk;
 
 use Exception;
@@ -32,5 +31,9 @@ use Exception;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
 class VersioningException extends Exception {
+
+	public function __construct() {
+		parent::__construct('A versioning/locking problem occurred during the API call.');
+	}
 
 }

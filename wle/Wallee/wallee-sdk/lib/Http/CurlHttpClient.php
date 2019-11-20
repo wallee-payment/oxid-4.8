@@ -1,10 +1,8 @@
 <?php
 /**
- * wallee SDK
+ *  SDK
  *
- * This library allows to interact with the wallee payment service.
- * wallee SDK: 1.0.0
- * 
+ * This library allows to interact with the  payment service.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +17,10 @@
  * limitations under the License.
  */
 
+
 namespace Wallee\Sdk\Http;
 
+use Wallee\Sdk\Http\ConnectionException;
 use Wallee\Sdk\ApiClient;
 
 /**
@@ -43,6 +43,9 @@ final class CurlHttpClient implements IHttpClient {
 		if ($apiClient->getConnectionTimeout() !== 0) {
 			curl_setopt($curl, CURLOPT_TIMEOUT, $apiClient->getConnectionTimeout());
 		}
+
+        // set life-time for DNS cache entries
+        curl_setopt($curl, CURLOPT_DNS_CACHE_TIMEOUT, 30);
 		// return the result on success, rather than just true
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
@@ -117,27 +120,27 @@ final class CurlHttpClient implements IHttpClient {
 	 * @return HttpResponse
 	 */
 	private function handleResponse(ApiClient $apiClient, HttpRequest $request, $curl, $response, $url) {
-		$http_header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-		$http_header = substr($response, 0, $http_header_size);
-		$http_body = substr($response, $http_header_size);
-		$response_info = curl_getinfo($curl);
+		$httpHeaderSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+		$httpHeader = substr($response, 0, $httpHeaderSize);
+		$httpBody = substr($response, $httpHeaderSize);
+		$responseInfo = curl_getinfo($curl);
 
 		// debug HTTP response body
 		if ($apiClient->isDebuggingEnabled()) {
-			error_log("[DEBUG] HTTP Response body ~BEGIN~".PHP_EOL.print_r($http_body, true).PHP_EOL."~END~".PHP_EOL, 3, $apiClient->getDebugFile());
+			error_log("[DEBUG] HTTP Response body ~BEGIN~".PHP_EOL.print_r($httpBody, true).PHP_EOL."~END~".PHP_EOL, 3, $apiClient->getDebugFile());
 		}
 
-		if ($response_info['http_code'] === 0) {
-			$curl_error_message = curl_error($curl);
+		if ($responseInfo['http_code'] === 0) {
+			$curlErrorMessage = curl_error($curl);
 
 			// curl_exec can sometimes fail but still return a blank message from curl_error().
-			if (!empty($curl_error_message)) {
-				throw new ConnectionException($url, $request->getLogToken(), $curl_error_message);
+			if (!empty($curlErrorMessage)) {
+				throw new ConnectionException($url, $request->getLogToken(), $curlErrorMessage);
 			} else {
 				throw new ConnectionException($url, $request->getLogToken(), 'API call failed for an unknown reason. This could happen if you are disconnected from the network.');
 			}
 		} else {
-			return new HttpResponse($response_info['http_code'], $http_header, $http_body);
+			return new HttpResponse($responseInfo['http_code'], $httpHeader, $httpBody);
 		}
 	}
 

@@ -58,16 +58,21 @@ class_exists(\Wle\Wallee\Application\Model\Transaction::class);        $transact
 
     public function refund()
     {
+    	WalleeModule::log(Logger::DEBUG, "Start refund.");
 class_exists(\Wle\Wallee\Application\Model\Transaction::class);        $transaction = oxNew(\Wle\Wallee\Application\Model\Transaction::class);
         /* @var $transaction \Wle\Wallee\Application\Model\Transaction */
-
         try {
-            if ($transaction->loadByOrder($this->getEditObjectId())) {
-                $job = RefundService::instance()->create($transaction, false);
+        	if ($transaction->loadByOrder($this->getEditObjectId())) {
+        		WalleeModule::log(Logger::DEBUG, "Loaded by order.");
+        		$transaction->pull();
+        		$job = RefundService::instance()->create($transaction, false);
+        		WalleeModule::log(Logger::DEBUG, "Created job.");
                 $job->setFormReductions(WalleeModule::instance()->getRequestParameter('item'));
                 $job->setRestock(WalleeModule::instance()->getRequestParameter('restock') !== null);
                 $job->save();
+                WalleeModule::log(Logger::DEBUG, "Saved job.");
                 RefundService::instance()->send($job);
+                WalleeModule::log(Logger::DEBUG, "Sent job.");
             } else {
                 WalleeModule::log(Logger::ERROR, "Unable to load transaction for order {$this->getEditObjectId()}.");
             }

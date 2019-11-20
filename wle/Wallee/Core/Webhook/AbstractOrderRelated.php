@@ -73,7 +73,7 @@ abstract class AbstractOrderRelated extends AbstractWebhook
 
     /**
      * @param $orderId
-     * @return Order
+     * @return \oxorder
      * @throws \Exception
      */
     protected function loadOrder($orderId)

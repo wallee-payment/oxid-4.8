@@ -1,16 +1,17 @@
 [![Build Status](https://travis-ci.org/wallee-payment/php-sdk.svg?branch=master)](https://travis-ci.org/wallee-payment/php-sdk)
 
-# wallee SDK for PHP
+# wallee PHP Library
 
-This repository contains the open source PHP SDK that allows you to access wallee from your PHP app.
+The wallee PHP library wraps around the wallee API. This library facilitates your interaction with various services such as transactions, accounts, and subscriptions.
 
-## Requirements
-
-* [PHP 5.6.0 and later](http://www.php.net/)
 
 ## Documentation
 
-https://app-wallee.com/doc/api/web-service
+[wallee Web Service API](https://app-wallee.com/doc/api/web-service)
+
+## Requirements
+
+- PHP 5.6.0 and above
 
 ## Installation
 
@@ -39,37 +40,94 @@ require_once '/path/to/php-sdk/autoload.php';
 ```
 
 ## Usage
+The library needs to be configured with your account's space id, user id, and secret key which are available in your [wallee
+account dashboard](https://app-wallee.com/account/select). Set `space_id`, `user_id`, and `api_secret` to their values.
 
-### Basic Example
+### Configuring a Service
+
+```php
+require_once(__DIR__ . '/autoload.php');
+
+// Configuration
+$spaceId = 405;
+$userId = 512;
+$secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
+
+// Setup API client
+$client = new \Wallee\Sdk\ApiClient($userId, $secret);
+
+// Create API service instance
+$transactionService = new \Wallee\Sdk\Service\TransactionService($client);
+$transactionPaymentPageService = new \Wallee\Sdk\Service\TransactionPaymentPageService($client);
+
+```
+
+To get started with sending transactions, please review the example below:
+
+```php
+require_once(__DIR__ . '/autoload.php');
+
+// Configuration
+$spaceId = 405;
+$userId = 512;
+$secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
+
+// Setup API client
+$client = new \Wallee\Sdk\ApiClient($userId, $secret);
+
+// Create API service instance
+$transactionService = new \Wallee\Sdk\Service\TransactionService($client);
+$transactionPaymentPageService = new \Wallee\Sdk\Service\TransactionPaymentPageService($client);
+
+// Create transaction
+$lineItem = new \Wallee\Sdk\Model\LineItemCreate();
+$lineItem->setName('Red T-Shirt');
+$lineItem->setUniqueId('5412');
+$lineItem->setSku('red-t-shirt-123');
+$lineItem->setQuantity(1);
+$lineItem->setAmountIncludingTax(29.95);
+$lineItem->setType(\Wallee\Sdk\Model\LineItemType::PRODUCT);
+
+
+$transaction = new \Wallee\Sdk\Model\TransactionCreate();
+$transaction->setCurrency('EUR');
+$transaction->setLineItems(array($lineItem));
+$transaction->setAutoConfirmationEnabled(true);
+
+$createdTransaction = $transactionService->create($spaceId, $transaction);
+
+// Create Payment Page URL:
+$redirectionUrl = $transactionPaymentPageService->paymentPageUrl($spaceId, $createdTransaction->getId());
+
+header('Location: ' . $redirectionUrl);
+
+```
+### HTTP Client
+You can either use `php curl` or `php socket` extentions. It is recommend you install the necessary extentions and enable them on your system.
+
+You have to ways two specify which HTTP client you prefer.
+
+```php
+$userId = 512;
+$secret = 'FKrO76r5VwJtBrqZawBspljbBNOxp5veKQQkOnZxucQ=';
+
+// Setup API client
+$client = new \Wallee\Sdk\Sdk\ApiClient($userId, $secret);
+
+$httpClientType = \Wallee\Sdk\Sdk\Http\HttpClientFactory::TYPE_CURL; // or \Wallee\Sdk\Sdk\Http\HttpClientFactory::TYPE_SOCKET
+
+$client->setHttpClientType($httpClientType);
+```
+
+You can also specify the HTTP client via the `WLE_HTTP_CLIENT` environment variable. The possible string values are `curl` or `socket`.
+
 
 ```php
 <?php
-require_once(__DIR__ . '/autoload.php');
-
-// Setup API client
-$client = new \Wallee\Sdk\ApiClient('YOUR_USER_ID', 'YOUR_API_KEY');
-
-// Create API service instance
-$service = new \Wallee\Sdk\Service\SpaceService($client);
-
-// The query restricts the spaces which are returned by the search.
-$filter = new \Wallee\Sdk\Model\EntityQueryFilter();
-$filter->setType(\Wallee\Sdk\Model\EntityQueryFilterType::LEAF);
-$filter->setOperator(\Wallee\Sdk\Model\CriteriaOperator::EQUALS);
-$filter->setFieldName('state');
-$filter->setValue(\Wallee\Sdk\Model\CreationEntityState::ACTIVE);
-
-$query = new \Wallee\Sdk\Model\EntityQuery();
-$query->setFilter($filter);
-
-try {
-    $result = $service->search($query);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling SpaceService->search: ', $e->getMessage(), PHP_EOL;
-}
+putenv('WLE_HTTP_CLIENT=curl');
+?>
 ```
 
 ## License
 
-Please see the [license file](LICENSE) for more information.
+Please see the [license file](https://github.com/wallee-payment/php-sdk/blob/master/LICENSE) for more information.

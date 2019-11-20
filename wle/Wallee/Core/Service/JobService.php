@@ -68,7 +68,6 @@ abstract class JobService extends AbstractService
      */
     public function create(Transaction $transaction, $save = true)
     {
-        $transaction->pull();
         if (!in_array($transaction->getState(), $this->getSupportedTransactionStates())) {
             $states = implode(", ", $this->getSupportedTransactionStates());
             throw new \Exception("Job may only be created if transaction in one of states: $states.");

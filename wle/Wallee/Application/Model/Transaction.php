@@ -460,10 +460,12 @@ class_exists('oxorder');		$order = oxNew('oxorder');
 	 * @throws \Exception
 	 */
 	public function pull(){
+		WalleeModule::log(Logger::DEBUG, "Start transaction pull.");
 		if (!$this->getTransactionId()) {
 			throw new \Exception('Transaction id must be set to pull.');
 		}
 		$this->apply(TransactionService::instance()->read($this->getTransactionId(), $this->getSpaceId()));
+		WalleeModule::log(Logger::DEBUG, "Transaction pull complete.");
 	}
 
 	/**
@@ -474,6 +476,7 @@ class_exists('oxorder');		$order = oxNew('oxorder');
 	 * @throws \Exception
 	 */
 	public function updateFromSession($confirm = false){
+		WalleeModule::log(Logger::DEBUG, "Start update from session.");
 		$this->pull(); // ensure updateable
 		if ($this->getState() !== TransactionState::PENDING) {
 			throw new \Exception('Transaction not in state PENDING may no longer be updated:' . $this->getTransactionId());
@@ -482,6 +485,7 @@ class_exists('oxorder');		$order = oxNew('oxorder');
 		$adapter = new SessionAdapter($this->getSession());
 		$transaction = TransactionService::instance()->update($adapter->getUpdateData($this), $confirm);
 		$this->apply($transaction);
+		WalleeModule::log(Logger::DEBUG, "Complete update from session.");
 		return $transaction;
 	}
 	
@@ -490,6 +494,7 @@ class_exists('oxorder');		$order = oxNew('oxorder');
 	}
 
 	public function updateLineItems(){
+		WalleeModule::log(Logger::DEBUG, "Start update line items.");
 class_exists('oxorder');		$order = oxNew('oxorder');
 		/* @var $order\oxorder */
 		if (!$order->load($this->getOrderId())) {
@@ -502,6 +507,7 @@ class_exists('oxorder');		$order = oxNew('oxorder');
 		$update->setTransactionId($this->getTransactionId());
 		TransactionService::instance()->updateLineItems($this->getSpaceId(), $update);
 		$this->pull();
+		WalleeModule::log(Logger::DEBUG, "Complete update line items.");
 		return $this->getSdkTransaction();
 	}
 
@@ -512,11 +518,13 @@ class_exists('oxorder');		$order = oxNew('oxorder');
 	 * @throws \Exception
 	 */
 	public function create(){
+		WalleeModule::log(Logger::DEBUG, "Start transaction create.");
 		$adapter = new SessionAdapter($this->getSession());
 		$transaction = TransactionService::instance()->create($adapter->getCreateData());
 		$this->dbVersion = 0;
 		$this->apply($transaction);
 		
+		WalleeModule::log(Logger::DEBUG, "Complete transaction create.");
 		return $transaction;
 	}
 
@@ -526,11 +534,14 @@ class_exists('oxorder');		$order = oxNew('oxorder');
 	 * @throws \Exception
 	 */
 	public function save(){
+		WalleeModule::log(Logger::DEBUG, "Start transaction save.");
 		// only save to db with order, otherwise save relevant ids to session.
 		if ($this->getOrderId()) {
+			WalleeModule::log(Logger::DEBUG, "Saving to database.");
 			return parent::save();
 		}
 		else if ($this->getSession()->getUser()) {
+			WalleeModule::log(Logger::DEBUG, "Saving to session.");
 			$this->getSession()->setVariable('Wallee_transaction_id', $this->getTransactionId());
 			$this->getSession()->setVariable('Wallee_space_id', $this->getSpaceId());
 			$this->getSession()->setVariable('Wallee_user_id', $this->getSession()->getUser()->getId());
@@ -584,6 +595,7 @@ class_exists('oxobjectexception');			$exception = oxNew('oxobjectexception');
 		$updateQuery = "update {$coreTableName} set " . $this->_getUpdateFields() . " , wleversion=wleversion + 1 " .
 				 " where {$coreTableName}.oxid = " . $database->quote($this->getId()) .
 				 " and {$coreTableName}.wleversion = {$dbVersion}";
+		WalleeModule::log(Logger::DEBUG, "Updating  transaction with query [$updateQuery]");
 		
 		$this->beforeUpdate();
 		$affected = \oxdb::getDb()->execute($updateQuery);

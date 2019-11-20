@@ -15,7 +15,6 @@ use Monolog\Logger;
 use Wallee\Sdk\ApiException;
 use Wallee\Sdk\Model\CreationEntityState;
 use Wallee\Sdk\Model\CriteriaOperator;
-use Wallee\Sdk\Model\DeliveryIndication;
 use Wallee\Sdk\Model\DeliveryIndicationState;
 use Wallee\Sdk\Model\EntityQuery;
 use Wallee\Sdk\Model\EntityQueryFilter;
