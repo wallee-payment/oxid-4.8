@@ -1,6 +1,6 @@
 # OXID 4.8
 
-v1.0.14, 2019-11
+v1.0.15, 2019-11
 
 This repository contains the OXID  wallee payment module that enables the shop to process payments with [wallee](https://www.wallee.com).
 
@@ -13,8 +13,8 @@ This repository contains the OXID  wallee payment module that enables the shop t
 
 ## Documentation
 
-* [English](https://plugin-documentation.wallee.com/wallee-payment/oxid-4.8/1.0.14/docs/en/documentation.html)
+* [English](https://plugin-documentation.wallee.com/wallee-payment/oxid-4.8/1.0.15/docs/en/documentation.html)
 
 ## License
 
-Please see the [license file](https://github.com/wallee-payment/oxid-4.8/blob/1.0.14/LICENSE) for more information.
+Please see the [license file](https://github.com/wallee-payment/oxid-4.8/blob/1.0.15/LICENSE) for more information.
