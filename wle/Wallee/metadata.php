@@ -31,7 +31,7 @@ $aModule = array(
         'en' => 'WLE Wallee Module'
     ),
     'thumbnail' => 'out/pictures/picture.png',
-    'version' => '1.0.15',
+    'version' => '1.0.16',
     'author' => 'customweb GmbH',
     'url' => 'https://www.customweb.com',
     'email' => 'info@customweb.com',
