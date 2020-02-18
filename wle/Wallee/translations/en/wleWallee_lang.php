@@ -50,6 +50,8 @@ $aLang = array(
 	'wle_wallee_Open' => 'Open',
 	'wle_wallee_wallee Link' => 'wallee Link',
 	'wle_wallee_You must agree to the terms and conditions.' => 'You must agree to the terms and conditions.',
+	'wle_wallee_Rounding Adjustment' => 'Rounding Adjustment',
+	'wle_wallee_Totals mismatch, please contact merchant or use another payment method.' => 'Totals mismatch, please contact merchant or use another payment method.',
 	
 	// tpl translations
 	'wle_wallee_Restock' => 'Restock',

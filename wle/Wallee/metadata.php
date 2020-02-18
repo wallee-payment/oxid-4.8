@@ -31,7 +31,7 @@ $aModule = array(
         'en' => 'WLE Wallee Module'
     ),
     'thumbnail' => 'out/pictures/picture.png',
-    'version' => '1.0.17',
+    'version' => '1.0.18',
     'author' => 'customweb GmbH',
     'url' => 'https://www.customweb.com',
     'email' => 'info@customweb.com',
@@ -116,6 +116,12 @@ $aModule = array(
             'type' => 'bool',
             'value' => true
         ),
+    	array(
+    		'group' => 'wleWalleeShopSettings',
+    		'name' => 'wleWalleeEnforceConsistency',
+    		'type' => 'bool',
+    		'value' => true
+    	),
         array(
             'group' => 'wleWalleeShopSettings',
             'name' => 'wleWalleeInvoiceDoc',

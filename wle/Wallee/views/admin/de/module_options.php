@@ -26,17 +26,20 @@ $aLang = array(
     'SHOP_MODULE_wleWalleeEmailConfirm' => 'Email Bestätigung',
     'SHOP_MODULE_wleWalleeInvoiceDoc' => 'Rechnung',
     'SHOP_MODULE_wleWalleePackingDoc' => 'Lieferschein',
+	'SHOP_MODULE_wleWalleeEnforceConsistency' => 'Konsistenz sicherstellen',
     'SHOP_MODULE_wleWalleeLogLevel' => 'Log Level',
     'SHOP_MODULE_wleWalleeLogLevel_' => ' - ',
     'SHOP_MODULE_wleWalleeLogLevel_Error' => 'Error',
     'SHOP_MODULE_wleWalleeLogLevel_Debug' => 'Debug',
     'SHOP_MODULE_wleWalleeLogLevel_Info' => 'Info',
 	
+	
 	'HELP_SHOP_MODULE_wleWalleeUserId' => 'Der Benutzer benötigt volle Berechtigungen auf dem verbundenen space.',
 	'HELP_SHOP_MODULE_wleWalleeSpaceViewId' => 'Die Space View ID lässt das Gestalten der Zahlungsformulare und -seiten innerhalb eines Spaces. Dies kann u.A. für Multishopsysteme die unterschiedliche Aussehen haben sollten verwendet werden.',	'HELP_SHOP_MODULE_wleWalleeEmailConfirm' => 'You may deactivate the OXID order confirmation email for wallee transactions.',
 	'HELP_SHOP_MODULE_wleWalleeInvoiceDoc' => 'Sie können ihren Kunden erlauben Rechnungen für Ihre Bestellungen im Frontend-Bereich herunterzuladen.',
 	'HELP_SHOP_MODULE_wleWalleePackingDoc' => 'Sie können ihren Kunden erlauben Lieferscheine für Ihre Bestellungen im Frontend-Bereich herunterzuladen.',
 	'HELP_SHOP_MODULE_wleWalleeEmailConfirm' => 'Sie können OXID Bestellbestätigungen für wallee Transaktionen unterbinden.',
+	'HELP_SHOP_MODULE_wleWalleeEnforceConsistency' => 'Erfordere, dass die Einzelposten der Transaktion denen der Bestellung in Magento entsprechen. Dies kann dazu führen, dass die Zahlungsmethoden von wallee dem Kunden in bestimmten Fällen nicht zur Verfügung stehen. Im Gegenzug wird sichergestellt, dass nur korrekte Daten an wallee übertragen werden.',
 	
 	'wle_wallee_Settings saved successfully.' => 'Die Einstellungen wurden erfolgreich gespeichert.',
 	'wle_wallee_Payment methods successfully synchronized.' => 'Die Zahlarten wurden synchronisiert.',

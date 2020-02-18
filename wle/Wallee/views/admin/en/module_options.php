@@ -24,6 +24,7 @@ $aLang = array(
 	'SHOP_MODULE_wleWalleeEmailConfirm' => 'Email Confirm',
 	'SHOP_MODULE_wleWalleeInvoiceDoc' => 'Invoice Doc',
 	'SHOP_MODULE_wleWalleePackingDoc' => 'Packing Doc',
+	'SHOP_MODULE_wleWalleeEnforceConsistency' => 'Enforce consistency',
     'SHOP_MODULE_wleWalleeLogLevel' => 'Log Level',
     'SHOP_MODULE_wleWalleeLogLevel_' => ' - ',
     'SHOP_MODULE_wleWalleeLogLevel_Error' => 'Error',
@@ -35,6 +36,7 @@ $aLang = array(
 	'HELP_SHOP_MODULE_wleWalleeEmailConfirm' => 'You may deactivate the OXID order confirmation email for wallee transactions.',
 	'HELP_SHOP_MODULE_wleWalleeInvoiceDoc' => 'You may allow customers to download invoices in their account area.',
 	'HELP_SHOP_MODULE_wleWalleePackingDoc' => 'You may allow customers to download packing slips in their account area.',
+	'HELP_SHOP_MODULE_wleWalleeEnforceConsistency' => 'Require that the line items of the transaction correspond to those of the purchase order in Magento. This may result in the wallee payment methods not being available to the customer in certain cases. In return, it is ensured that only correct data is transmitted to wallee.',
 	
 	'wle_wallee_Settings saved successfully.' => 'Settings saved successfully.',
 	'wle_wallee_Payment methods successfully synchronized.' => 'Payment methods successfully synchronized.',

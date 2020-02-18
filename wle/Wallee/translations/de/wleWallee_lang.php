@@ -50,6 +50,8 @@ $aLang = array(
 	'wle_wallee_Open' => 'Öffnen',
 	'wle_wallee_wallee Link' => 'wallee Link',
 	'wle_wallee_You must agree to the terms and conditions.' => 'Sie müssen den AGBs und Datenschutzvereinbarung zustimmen.',
+	'wle_wallee_Rounding Adjustment' => 'Rundungsbetrag',
+	'wle_wallee_Totals mismatch, please contact merchant or use another payment method.' => 'Fehler bei Betragsberechnung. Bitte kontaktieren Sie den Händler oder wählen Sie eine andere Zahlart.',
 	
 	// tpl translations
 	'wle_wallee_Restock' => 'Lagerbestand wiederherstellen',
