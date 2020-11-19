@@ -83,4 +83,4 @@ CREATE TABLE IF NOT EXISTS `wleWallee_alert` (
 
 INSERT INTO `wleWallee_alert` (`WLEKEY`, `WLEFUNC`, `WLETARGET`, `WLECOUNT`) VALUES ('manual_task', 'manualtask', '_parent', 0);
 
-CREATE INDEX idx_oxorder_oxtransstatus ON `oxorder` (`OXTRANSSTATUS`);
+CREATE INDEX idx_wle_oxorder_oxtransstatus ON `oxorder` (`OXTRANSSTATUS`);

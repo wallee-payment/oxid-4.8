@@ -56,6 +56,15 @@ class SubscriptionProductVersionService {
 		$this->apiClient = $apiClient;
 	}
 
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
+
 
 	/**
 	 * Operation activate
@@ -128,6 +137,7 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -238,6 +248,7 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -352,6 +363,7 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -464,6 +476,7 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -578,6 +591,7 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -692,6 +706,7 @@ class SubscriptionProductVersionService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',

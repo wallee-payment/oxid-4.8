@@ -56,6 +56,15 @@ class TransactionPaymentPageService {
 		$this->apiClient = $apiClient;
 	}
 
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
+
 
 	/**
 	 * Operation paymentPageUrl
@@ -128,6 +137,7 @@ class TransactionPaymentPageService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',

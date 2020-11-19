@@ -56,6 +56,15 @@ class ShopifySubscriptionProductService {
 		$this->apiClient = $apiClient;
 	}
 
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
+
 
 	/**
 	 * Operation count
@@ -126,6 +135,7 @@ class ShopifySubscriptionProductService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -240,6 +250,7 @@ class ShopifySubscriptionProductService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -352,6 +363,7 @@ class ShopifySubscriptionProductService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -466,6 +478,7 @@ class ShopifySubscriptionProductService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -513,7 +526,7 @@ class ShopifySubscriptionProductService {
 	 * Update
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\ShopifySubscriptionProductActive $entity The Shopify subscription product object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @param \Wallee\Sdk\Model\ShopifySubscriptionProductUpdate $entity The Shopify subscription product object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -529,7 +542,7 @@ class ShopifySubscriptionProductService {
 	 * Update
 	 *
 	 * @param int $space_id  (required)
-	 * @param \Wallee\Sdk\Model\ShopifySubscriptionProductActive $entity The Shopify subscription product object with all the properties which should be updated. The id and the version are required properties. (required)
+	 * @param \Wallee\Sdk\Model\ShopifySubscriptionProductUpdate $entity The Shopify subscription product object with all the properties which should be updated. The id and the version are required properties. (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
@@ -580,6 +593,7 @@ class ShopifySubscriptionProductService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',

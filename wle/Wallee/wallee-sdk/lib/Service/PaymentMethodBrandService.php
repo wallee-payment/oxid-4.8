@@ -56,6 +56,15 @@ class PaymentMethodBrandService {
 		$this->apiClient = $apiClient;
 	}
 
+	/**
+	 * Returns the API client instance.
+	 *
+	 * @return ApiClient
+	 */
+	public function getApiClient() {
+		return $this->apiClient;
+	}
+
 
 	/**
 	 * Operation all
@@ -110,6 +119,7 @@ class PaymentMethodBrandService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
@@ -213,6 +223,7 @@ class PaymentMethodBrandService {
 		}
 		// make the API Call
 		try {
+			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'GET',
