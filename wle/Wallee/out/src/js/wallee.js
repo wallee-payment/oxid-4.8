@@ -27,9 +27,12 @@
         },
         
         heightChanged: function () {
-        	if(this.loaded && $('#Wallee-iframe-container > iframe').height() == 0) {
-        		$('#Wallee-iframe-container').parent().parent().hide();
-        	}
+            const self = this;
+            setTimeout(function () {
+                if(self.loaded && $('#Wallee-iframe-container > iframe').height() == 0) {
+                    $('#Wallee-iframe-container').parent().parent().hide();
+                }
+            }, 500);
         },
         
         getAgbParameter: function() {
