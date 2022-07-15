@@ -27,3 +27,4 @@ Please see the [license file](https://github.com/wallee-payment/oxid-4.8/blob/1.
 
 New line
 New line 2
+New Line 3
