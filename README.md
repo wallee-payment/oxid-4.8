@@ -26,3 +26,4 @@ Support queries can be issued on the [wallee support site](https://app-wallee.co
 Please see the [license file](https://github.com/wallee-payment/oxid-4.8/blob/1.0.35/LICENSE) for more information.
 
 New line
+New line 2
