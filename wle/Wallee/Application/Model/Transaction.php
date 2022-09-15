@@ -596,10 +596,10 @@ class_exists('oxobjectexception');			$exception = oxNew('oxobjectexception');
 				 " where {$coreTableName}.oxid = " . $database->quote($this->getId()) .
 				 " and {$coreTableName}.wleversion = {$dbVersion}";
 		WalleeModule::log(Logger::DEBUG, "Updating  transaction with query [$updateQuery]");
-		
+
 		$this->beforeUpdate();
 		$affected = \oxdb::getDb()->execute($updateQuery);
-		
+
 		if ($affected === 0) {
 			throw new OptimisticLockingException($this->getId(), $this->_sTableName, $updateQuery);
 		}

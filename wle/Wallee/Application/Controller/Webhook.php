@@ -50,6 +50,9 @@ class Webhook extends \oxview
         } catch (\Exception $e) {
             header("HTTP/1.1 500 Internal Server Error");
             echo($e->getMessage());
+            $message = "Oops, something was wrong. {$e->getMessage()} - {$e->getTraceAsString()}.";
+            WalleeModule::log(Logger::ERROR, $message);
+            WalleeModule::getUtilsView()->addErrorToDisplay($message);
             exit();
         }
         header("HTTP/1.1 200 OK");

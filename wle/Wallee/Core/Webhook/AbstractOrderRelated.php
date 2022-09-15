@@ -22,6 +22,7 @@ abstract class AbstractOrderRelated extends AbstractWebhook
 {
 	const NO_ORDER = 1;
 	const OPTIMISTIC_RETRIES = 6;
+	const SECONDS_TO_WAIT = 1;
 
     /**
      * Processes the received order related webhook request.
@@ -35,7 +36,6 @@ abstract class AbstractOrderRelated extends AbstractWebhook
         }
         for($i = 0; $i <= self::OPTIMISTIC_RETRIES; $i++) {
 	        try {
-	        	\oxdb::getDb()->startTransaction();
 	            $entity = $this->loadEntity($request);
 	            $orderId = $this->getOrderId($entity);
 	            $order = $this->loadOrder($orderId);
@@ -51,14 +51,13 @@ abstract class AbstractOrderRelated extends AbstractWebhook
 		            }
 	            }
 	            
-	            \oxdb::getDb()->commitTransaction();
 	        }catch(OptimisticLockingException $e){
 	        	WalleeModule::log(Logger::WARNING, "Optimistic locking query: " . $e->getQueryString());
 	        	WalleeModule::rollback();
 	        	if($i === self::OPTIMISTIC_RETRIES) {
 	        		throw $e;
 	        	}
-	        	sleep(1);
+	        	sleep(self::SECONDS_TO_WAIT);
 	        }
 	        catch (\Exception $e) {
 	            WalleeModule::log(Logger::ERROR, $e->getMessage() . ' - ' . $e->getTraceAsString());

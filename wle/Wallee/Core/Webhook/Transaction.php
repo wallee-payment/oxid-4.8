@@ -58,7 +58,18 @@ class_exists(\Wle\Wallee\Application\Model\Transaction::class);        $dbTransa
      */
     protected function processOrderRelatedInner(\oxorder $order, $entity)
     {
+        $finalStates = [
+            TransactionState::FAILED,
+            TransactionState::VOIDED,
+            TransactionState::DECLINE,
+            TransactionState::FULFILL
+        ];
+
         /* @var $entity \Wallee\Sdk\Model\Transaction */
+        if (in_array($entity->getState(), $finalStates)) {
+            return false;
+        }
+
         /* @var $order \Wle\Wallee\Extend\Application\Model\Order */
         if ($entity && $entity->getState() !== $order->getWalleeTransaction()->getState()) {
             $cancel = false;
