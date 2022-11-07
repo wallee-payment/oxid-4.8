@@ -12,7 +12,6 @@
 namespace Wle\Wallee\Application\Model;
 require_once(OX_BASE_PATH . 'modules/wle/Wallee/autoload.php');
 
-;
 
 /**
  * Class Alert.
@@ -43,15 +42,5 @@ class Alert
     public static function loadAll() {
         $query = "SELECT `WLEKEY`, `WLECOUNT`, `WLEFUNC`, `WLETARGET` FROM `wleWallee_alert`";
         return \oxdb::getDb()->getAll($query);
-    }
-
-    /**
-     * Class constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->init(self::getTableName());
     }
 }
