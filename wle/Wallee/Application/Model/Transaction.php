@@ -114,6 +114,10 @@ class Transaction extends \oxbase {
 		return $this->version;
 	}
 
+	public function getEmailSent(){
+		return $this->getFieldData('wleemailsent');
+	}
+
 	public function setOrderId($value){
 		$this->_setFieldData('oxorderid', $value);
 	}
@@ -140,6 +144,14 @@ class Transaction extends \oxbase {
 
 	protected function setSdkTransaction($value){
 		$this->sdkTransaction = $value;
+	}
+
+	public function setEmailSent($value){
+		$this->_setFieldData('wleemailsent', $value);
+	}
+
+	public function markEmailAsSent(){
+		$this->setEmailSent(true);
 	}
 
 	public function loadByOrder($orderId){

@@ -1,0 +1,1 @@
+ALTER TABLE `wleWallee_transaction` ADD `WLEEMAILSENT` bool DEFAULT '0';
