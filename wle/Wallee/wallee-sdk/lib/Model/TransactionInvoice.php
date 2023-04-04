@@ -58,7 +58,6 @@ class TransactionInvoice extends TransactionAwareEntity
         'external_id' => 'string',
         'language' => 'string',
         'line_items' => '\Wallee\Sdk\Model\LineItem[]',
-        'linked_space_id' => 'int',
         'merchant_reference' => 'string',
         'outstanding_amount' => 'float',
         'paid_on' => '\DateTime',
@@ -87,7 +86,6 @@ class TransactionInvoice extends TransactionAwareEntity
         'external_id' => null,
         'language' => null,
         'line_items' => null,
-        'linked_space_id' => 'int64',
         'merchant_reference' => null,
         'outstanding_amount' => null,
         'paid_on' => 'date-time',
@@ -117,7 +115,6 @@ class TransactionInvoice extends TransactionAwareEntity
         'external_id' => 'externalId',
         'language' => 'language',
         'line_items' => 'lineItems',
-        'linked_space_id' => 'linkedSpaceId',
         'merchant_reference' => 'merchantReference',
         'outstanding_amount' => 'outstandingAmount',
         'paid_on' => 'paidOn',
@@ -146,7 +143,6 @@ class TransactionInvoice extends TransactionAwareEntity
         'external_id' => 'setExternalId',
         'language' => 'setLanguage',
         'line_items' => 'setLineItems',
-        'linked_space_id' => 'setLinkedSpaceId',
         'merchant_reference' => 'setMerchantReference',
         'outstanding_amount' => 'setOutstandingAmount',
         'paid_on' => 'setPaidOn',
@@ -175,7 +171,6 @@ class TransactionInvoice extends TransactionAwareEntity
         'external_id' => 'getExternalId',
         'language' => 'getLanguage',
         'line_items' => 'getLineItems',
-        'linked_space_id' => 'getLinkedSpaceId',
         'merchant_reference' => 'getMerchantReference',
         'outstanding_amount' => 'getOutstandingAmount',
         'paid_on' => 'getPaidOn',
@@ -222,8 +217,6 @@ class TransactionInvoice extends TransactionAwareEntity
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
         
         $this->container['line_items'] = isset($data['line_items']) ? $data['line_items'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['merchant_reference'] = isset($data['merchant_reference']) ? $data['merchant_reference'] : null;
         
@@ -591,7 +584,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets language
      *
-     * @param string $language 
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */
@@ -623,31 +616,6 @@ class TransactionInvoice extends TransactionAwareEntity
     public function setLineItems($line_items)
     {
         $this->container['line_items'] = $line_items;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
@@ -745,7 +713,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -795,7 +763,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\TransactionInvoiceState $state 
+     * @param \Wallee\Sdk\Model\TransactionInvoiceState $state The object's current state.
      *
      * @return $this
      */
@@ -870,7 +838,7 @@ class TransactionInvoice extends TransactionAwareEntity
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
@@ -888,6 +856,7 @@ class TransactionInvoice extends TransactionAwareEntity
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -900,6 +869,7 @@ class TransactionInvoice extends TransactionAwareEntity
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -913,6 +883,7 @@ class TransactionInvoice extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -929,6 +900,7 @@ class TransactionInvoice extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

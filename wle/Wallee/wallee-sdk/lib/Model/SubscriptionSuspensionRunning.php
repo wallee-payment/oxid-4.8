@@ -112,6 +112,10 @@ class SubscriptionSuspensionRunning extends SubscriptionSuspension
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['note']) && (mb_strlen($this->container['note']) > 300)) {
+            $invalidProperties[] = "invalid value for 'note', the character length must be smaller than or equal to 300.";
+        }
+
         return $invalidProperties;
     }
 
@@ -198,6 +202,7 @@ class SubscriptionSuspensionRunning extends SubscriptionSuspension
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -210,6 +215,7 @@ class SubscriptionSuspensionRunning extends SubscriptionSuspension
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -223,6 +229,7 @@ class SubscriptionSuspensionRunning extends SubscriptionSuspension
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -239,6 +246,7 @@ class SubscriptionSuspensionRunning extends SubscriptionSuspension
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

@@ -114,6 +114,22 @@ class HumanUserCreate extends AbstractHumanUserUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 128)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 128.";
+        }
+
+        if (!is_null($this->container['firstname']) && (mb_strlen($this->container['firstname']) > 100)) {
+            $invalidProperties[] = "invalid value for 'firstname', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['lastname']) && (mb_strlen($this->container['lastname']) > 100)) {
+            $invalidProperties[] = "invalid value for 'lastname', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 30)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 30.";
+        }
+
         return $invalidProperties;
     }
 
@@ -225,6 +241,7 @@ class HumanUserCreate extends AbstractHumanUserUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -237,6 +254,7 @@ class HumanUserCreate extends AbstractHumanUserUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -250,6 +268,7 @@ class HumanUserCreate extends AbstractHumanUserUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -266,6 +285,7 @@ class HumanUserCreate extends AbstractHumanUserUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

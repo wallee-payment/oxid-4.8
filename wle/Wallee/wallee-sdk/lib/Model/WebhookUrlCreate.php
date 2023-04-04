@@ -112,6 +112,18 @@ class WebhookUrlCreate extends AbstractWebhookUrlUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        }
+
+        if (!is_null($this->container['url']) && (mb_strlen($this->container['url']) > 500)) {
+            $invalidProperties[] = "invalid value for 'url', the character length must be smaller than or equal to 500.";
+        }
+
+        if (!is_null($this->container['url']) && (mb_strlen($this->container['url']) < 9)) {
+            $invalidProperties[] = "invalid value for 'url', the character length must be bigger than or equal to 9.";
+        }
+
         return $invalidProperties;
     }
 
@@ -198,6 +210,7 @@ class WebhookUrlCreate extends AbstractWebhookUrlUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -210,6 +223,7 @@ class WebhookUrlCreate extends AbstractWebhookUrlUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -223,6 +237,7 @@ class WebhookUrlCreate extends AbstractWebhookUrlUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -239,6 +254,7 @@ class WebhookUrlCreate extends AbstractWebhookUrlUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

@@ -47,14 +47,18 @@ final class ApiClient {
 	 *
 	 * @var array
 	 */
-	private $defaultHeaders = [];
+	private $defaultHeaders = [
+        'x-meta-sdk-version' => "3.2.0",
+        'x-meta-sdk-language' => 'php',
+        'x-meta-sdk-provider' => "wallee",
+    ];
 
 	/**
 	 * The user agent that is sent with any request.
 	 *
 	 * @var string
 	 */
-	private $userAgent = 'PHP-Client/2.1.4/php';
+	private $userAgent = 'PHP-Client/3.2.0/php';
 
 	/**
 	 * The path to the certificate authority file.
@@ -70,13 +74,19 @@ final class ApiClient {
 	 */
 	private $enableCertificateAuthorityCheck = true;
 
-	/**
+    /**
+     * the constant for the default connection time out
+     *
+     * @var integer
+     */
+    const INITIAL_CONNECTION_TIMEOUT = 25;
+
+    /**
 	 * The connection timeout in seconds.
 	 *
 	 * @var integer
 	 */
-	private $connectionTimeout = 20;
-	CONST CONNECTION_TIMEOUT = 20;
+	private $connectionTimeout;
 
 	/**
 	 * The http client type to use for communication.
@@ -134,10 +144,12 @@ final class ApiClient {
 		$this->userId = $userId;
         $this->applicationKey = $applicationKey;
 
+        $this->connectionTimeout = self::INITIAL_CONNECTION_TIMEOUT;
 		$this->certificateAuthority = dirname(__FILE__) . '/ca-bundle.crt';
 		$this->serializer = new ObjectSerializer();
 		$this->isDebuggingEnabled() ? $this->serializer->enableDebugging() : $this->serializer->disableDebugging();
 		$this->serializer->setDebugFile($this->getDebugFile());
+		$this->addDefaultHeader('x-meta-sdk-language-version', phpversion());
 	}
 
 	/**
@@ -248,7 +260,7 @@ final class ApiClient {
 	 * @return ApiClient
 	 */
 	public function resetConnectionTimeout() {
-		$this->connectionTimeout = self::CONNECTION_TIMEOUT;
+		$this->connectionTimeout = self::INITIAL_CONNECTION_TIMEOUT;
 		return $this;
 	}
 
@@ -311,9 +323,19 @@ final class ApiClient {
 			throw new \InvalidArgumentException('The header key must be a string.');
 		}
 
-		$defaultHeaders[$key] = $value;
+		$this->defaultHeaders[$key] = $value;
 		return $this;
 	}
+
+	/**
+     * Gets the default headers that will be sent in the request.
+	 * 
+	 * @since 3.1.2
+	 * @return string[]
+     */
+    function getDefaultHeaders() {
+        return $this->defaultHeaders;
+    }
 
 	/**
 	 * Returns true, when debugging is enabled.
@@ -445,8 +467,11 @@ final class ApiClient {
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @throws \Wallee\Sdk\VersioningException
 	 */
-	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null, $endpointPath = null) {
-		$request = new HttpRequest($this->getSerializer(), $this->buildRequestUrl($resourcePath, $queryParams), $method, $this->generateUniqueToken());
+	public function callApi($resourcePath, $method, $queryParams, $postData, $headerParams, $responseType = null, $endpointPath = null, $timeOut = null) {
+        if ($timeOut === null) {
+            $timeOut = $this->getConnectionTimeout();
+        }
+		$request = new HttpRequest($this->getSerializer(), $this->buildRequestUrl($resourcePath, $queryParams), $method, $this->generateUniqueToken(), $timeOut);
 		$request->setUserAgent($this->getUserAgent());
 		$request->addHeaders(array_merge(
 			(array)$this->defaultHeaders,
@@ -560,6 +585,18 @@ final class ApiClient {
         return $this->accountService;
     }
     
+    protected $analyticsQueryService;
+
+    /**
+     * @return \Wallee\Sdk\Service\AnalyticsQueryService
+     */
+    public function getAnalyticsQueryService() {
+        if(is_null($this->analyticsQueryService)){
+            $this->analyticsQueryService = new \Wallee\Sdk\Service\AnalyticsQueryService($this);
+        }
+        return $this->analyticsQueryService;
+    }
+    
     protected $applicationUserService;
 
     /**
@@ -570,6 +607,30 @@ final class ApiClient {
             $this->applicationUserService = new \Wallee\Sdk\Service\ApplicationUserService($this);
         }
         return $this->applicationUserService;
+    }
+    
+    protected $bankAccountService;
+
+    /**
+     * @return \Wallee\Sdk\Service\BankAccountService
+     */
+    public function getBankAccountService() {
+        if(is_null($this->bankAccountService)){
+            $this->bankAccountService = new \Wallee\Sdk\Service\BankAccountService($this);
+        }
+        return $this->bankAccountService;
+    }
+    
+    protected $bankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\BankTransactionService
+     */
+    public function getBankTransactionService() {
+        if(is_null($this->bankTransactionService)){
+            $this->bankTransactionService = new \Wallee\Sdk\Service\BankTransactionService($this);
+        }
+        return $this->bankTransactionService;
     }
     
     protected $cardProcessingService;
@@ -594,6 +655,18 @@ final class ApiClient {
             $this->chargeAttemptService = new \Wallee\Sdk\Service\ChargeAttemptService($this);
         }
         return $this->chargeAttemptService;
+    }
+    
+    protected $chargeBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\ChargeBankTransactionService
+     */
+    public function getChargeBankTransactionService() {
+        if(is_null($this->chargeBankTransactionService)){
+            $this->chargeBankTransactionService = new \Wallee\Sdk\Service\ChargeBankTransactionService($this);
+        }
+        return $this->chargeBankTransactionService;
     }
     
     protected $chargeFlowLevelPaymentLinkService;
@@ -666,6 +739,18 @@ final class ApiClient {
             $this->countryStateService = new \Wallee\Sdk\Service\CountryStateService($this);
         }
         return $this->countryStateService;
+    }
+    
+    protected $currencyBankAccountService;
+
+    /**
+     * @return \Wallee\Sdk\Service\CurrencyBankAccountService
+     */
+    public function getCurrencyBankAccountService() {
+        if(is_null($this->currencyBankAccountService)){
+            $this->currencyBankAccountService = new \Wallee\Sdk\Service\CurrencyBankAccountService($this);
+        }
+        return $this->currencyBankAccountService;
     }
     
     protected $currencyService;
@@ -788,6 +873,18 @@ final class ApiClient {
         return $this->documentTemplateTypeService;
     }
     
+    protected $externalTransferBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\ExternalTransferBankTransactionService
+     */
+    public function getExternalTransferBankTransactionService() {
+        if(is_null($this->externalTransferBankTransactionService)){
+            $this->externalTransferBankTransactionService = new \Wallee\Sdk\Service\ExternalTransferBankTransactionService($this);
+        }
+        return $this->externalTransferBankTransactionService;
+    }
+    
     protected $humanUserService;
 
     /**
@@ -858,6 +955,54 @@ final class ApiClient {
             $this->installmentPlanSliceConfigurationService = new \Wallee\Sdk\Service\InstallmentPlanSliceConfigurationService($this);
         }
         return $this->installmentPlanSliceConfigurationService;
+    }
+    
+    protected $internalTransferBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InternalTransferBankTransactionService
+     */
+    public function getInternalTransferBankTransactionService() {
+        if(is_null($this->internalTransferBankTransactionService)){
+            $this->internalTransferBankTransactionService = new \Wallee\Sdk\Service\InternalTransferBankTransactionService($this);
+        }
+        return $this->internalTransferBankTransactionService;
+    }
+    
+    protected $invoiceReconciliationRecordInvoiceLinkService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService
+     */
+    public function getInvoiceReconciliationRecordInvoiceLinkService() {
+        if(is_null($this->invoiceReconciliationRecordInvoiceLinkService)){
+            $this->invoiceReconciliationRecordInvoiceLinkService = new \Wallee\Sdk\Service\InvoiceReconciliationRecordInvoiceLinkService($this);
+        }
+        return $this->invoiceReconciliationRecordInvoiceLinkService;
+    }
+    
+    protected $invoiceReconciliationRecordService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InvoiceReconciliationRecordService
+     */
+    public function getInvoiceReconciliationRecordService() {
+        if(is_null($this->invoiceReconciliationRecordService)){
+            $this->invoiceReconciliationRecordService = new \Wallee\Sdk\Service\InvoiceReconciliationRecordService($this);
+        }
+        return $this->invoiceReconciliationRecordService;
+    }
+    
+    protected $invoiceReimbursementService;
+
+    /**
+     * @return \Wallee\Sdk\Service\InvoiceReimbursementService
+     */
+    public function getInvoiceReimbursementService() {
+        if(is_null($this->invoiceReimbursementService)){
+            $this->invoiceReimbursementService = new \Wallee\Sdk\Service\InvoiceReimbursementService($this);
+        }
+        return $this->invoiceReimbursementService;
     }
     
     protected $labelDescriptionGroupService;
@@ -1052,6 +1197,30 @@ final class ApiClient {
         return $this->paymentTerminalTillService;
     }
     
+    protected $paymentTerminalTransactionSummaryService;
+
+    /**
+     * @return \Wallee\Sdk\Service\PaymentTerminalTransactionSummaryService
+     */
+    public function getPaymentTerminalTransactionSummaryService() {
+        if(is_null($this->paymentTerminalTransactionSummaryService)){
+            $this->paymentTerminalTransactionSummaryService = new \Wallee\Sdk\Service\PaymentTerminalTransactionSummaryService($this);
+        }
+        return $this->paymentTerminalTransactionSummaryService;
+    }
+    
+    protected $paymentWebAppService;
+
+    /**
+     * @return \Wallee\Sdk\Service\PaymentWebAppService
+     */
+    public function getPaymentWebAppService() {
+        if(is_null($this->paymentWebAppService)){
+            $this->paymentWebAppService = new \Wallee\Sdk\Service\PaymentWebAppService($this);
+        }
+        return $this->paymentWebAppService;
+    }
+    
     protected $permissionService;
 
     /**
@@ -1064,6 +1233,18 @@ final class ApiClient {
         return $this->permissionService;
     }
     
+    protected $refundBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\RefundBankTransactionService
+     */
+    public function getRefundBankTransactionService() {
+        if(is_null($this->refundBankTransactionService)){
+            $this->refundBankTransactionService = new \Wallee\Sdk\Service\RefundBankTransactionService($this);
+        }
+        return $this->refundBankTransactionService;
+    }
+    
     protected $refundCommentService;
 
     /**
@@ -1074,6 +1255,18 @@ final class ApiClient {
             $this->refundCommentService = new \Wallee\Sdk\Service\RefundCommentService($this);
         }
         return $this->refundCommentService;
+    }
+    
+    protected $refundRecoveryBankTransactionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\RefundRecoveryBankTransactionService
+     */
+    public function getRefundRecoveryBankTransactionService() {
+        if(is_null($this->refundRecoveryBankTransactionService)){
+            $this->refundRecoveryBankTransactionService = new \Wallee\Sdk\Service\RefundRecoveryBankTransactionService($this);
+        }
+        return $this->refundRecoveryBankTransactionService;
     }
     
     protected $refundService;
@@ -1532,6 +1725,18 @@ final class ApiClient {
         return $this->transactionLightboxService;
     }
     
+    protected $transactionLineItemVersionService;
+
+    /**
+     * @return \Wallee\Sdk\Service\TransactionLineItemVersionService
+     */
+    public function getTransactionLineItemVersionService() {
+        if(is_null($this->transactionLineItemVersionService)){
+            $this->transactionLineItemVersionService = new \Wallee\Sdk\Service\TransactionLineItemVersionService($this);
+        }
+        return $this->transactionLineItemVersionService;
+    }
+    
     protected $transactionMobileSdkService;
 
     /**
@@ -1614,6 +1819,18 @@ final class ApiClient {
             $this->userSpaceRoleService = new \Wallee\Sdk\Service\UserSpaceRoleService($this);
         }
         return $this->userSpaceRoleService;
+    }
+    
+    protected $webAppService;
+
+    /**
+     * @return \Wallee\Sdk\Service\WebAppService
+     */
+    public function getWebAppService() {
+        if(is_null($this->webAppService)){
+            $this->webAppService = new \Wallee\Sdk\Service\WebAppService($this);
+        }
+        return $this->webAppService;
     }
     
     protected $webhookListenerService;

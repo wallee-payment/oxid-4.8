@@ -53,6 +53,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
         'created_on' => '\DateTime',
         'external_id' => 'string',
         'id' => 'int',
+        'initial_execution_date' => '\DateTime',
         'initial_payment_transaction' => 'int',
         'initial_shopify_transaction' => 'int',
         'language' => 'string',
@@ -77,6 +78,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
         'created_on' => 'date-time',
         'external_id' => null,
         'id' => 'int64',
+        'initial_execution_date' => 'date-time',
         'initial_payment_transaction' => 'int64',
         'initial_shopify_transaction' => 'int64',
         'language' => null,
@@ -102,6 +104,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
         'created_on' => 'createdOn',
         'external_id' => 'externalId',
         'id' => 'id',
+        'initial_execution_date' => 'initialExecutionDate',
         'initial_payment_transaction' => 'initialPaymentTransaction',
         'initial_shopify_transaction' => 'initialShopifyTransaction',
         'language' => 'language',
@@ -126,6 +129,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
         'created_on' => 'setCreatedOn',
         'external_id' => 'setExternalId',
         'id' => 'setId',
+        'initial_execution_date' => 'setInitialExecutionDate',
         'initial_payment_transaction' => 'setInitialPaymentTransaction',
         'initial_shopify_transaction' => 'setInitialShopifyTransaction',
         'language' => 'setLanguage',
@@ -150,6 +154,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
         'created_on' => 'getCreatedOn',
         'external_id' => 'getExternalId',
         'id' => 'getId',
+        'initial_execution_date' => 'getInitialExecutionDate',
         'initial_payment_transaction' => 'getInitialPaymentTransaction',
         'initial_shopify_transaction' => 'getInitialShopifyTransaction',
         'language' => 'getLanguage',
@@ -189,6 +194,8 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        
+        $this->container['initial_execution_date'] = isset($data['initial_execution_date']) ? $data['initial_execution_date'] : null;
         
         $this->container['initial_payment_transaction'] = isset($data['initial_payment_transaction']) ? $data['initial_payment_transaction'] : null;
         
@@ -408,13 +415,38 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets initial_execution_date
+     *
+     * @return \DateTime
+     */
+    public function getInitialExecutionDate()
+    {
+        return $this->container['initial_execution_date'];
+    }
+
+    /**
+     * Sets initial_execution_date
+     *
+     * @param \DateTime $initial_execution_date 
+     *
+     * @return $this
+     */
+    public function setInitialExecutionDate($initial_execution_date)
+    {
+        $this->container['initial_execution_date'] = $initial_execution_date;
 
         return $this;
     }
@@ -483,7 +515,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets language
      *
-     * @param string $language 
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */
@@ -508,7 +540,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -583,7 +615,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionState $state 
+     * @param \Wallee\Sdk\Model\ShopifySubscriptionState $state The object's current state.
      *
      * @return $this
      */
@@ -708,7 +740,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
@@ -726,6 +758,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -738,6 +771,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -751,6 +785,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -767,6 +802,7 @@ class ShopifySubscription implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

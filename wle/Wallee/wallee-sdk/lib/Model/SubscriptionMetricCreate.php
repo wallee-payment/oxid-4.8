@@ -47,8 +47,6 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'description' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
-        'name' => '\Wallee\Sdk\Model\DatabaseTranslatedStringCreate',
         'type' => 'int'
     ];
 
@@ -58,8 +56,6 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'description' => null,
-        'name' => null,
         'type' => 'int64'
     ];
 
@@ -70,8 +66,6 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
      * @var string[]
      */
     protected static $attributeMap = [
-        'description' => 'description',
-        'name' => 'name',
         'type' => 'type'
     ];
 
@@ -81,8 +75,6 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
      * @var string[]
      */
     protected static $setters = [
-        'description' => 'setDescription',
-        'name' => 'setName',
         'type' => 'setType'
     ];
 
@@ -92,8 +84,6 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
      * @var string[]
      */
     protected static $getters = [
-        'description' => 'getDescription',
-        'name' => 'getName',
         'type' => 'getType'
     ];
 
@@ -110,10 +100,6 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
     {
         parent::__construct($data);
 
-        
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         
@@ -215,56 +201,6 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
     
 
     /**
-     * Gets description
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $description 
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets name
-     *
-     * @return \Wallee\Sdk\Model\DatabaseTranslatedStringCreate
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param \Wallee\Sdk\Model\DatabaseTranslatedStringCreate $name 
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets type
      *
      * @return int
@@ -295,6 +231,7 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -307,6 +244,7 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -320,6 +258,7 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -336,6 +275,7 @@ class SubscriptionMetricCreate extends AbstractSubscriptionMetricUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

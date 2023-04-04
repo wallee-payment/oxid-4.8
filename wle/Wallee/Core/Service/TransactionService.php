@@ -15,12 +15,13 @@ require_once(OX_BASE_PATH . 'modules/wle/Wallee/autoload.php');
 use Monolog\Logger;
 use Wallee\Sdk\Model\EntityQuery;
 use Wallee\Sdk\Model\TransactionCreate;
-use Wallee\Sdk\Model\TransactionLineItemUpdateRequest;
+use Wallee\Sdk\Model\TransactionLineItemVersionCreate;
 use Wallee\Sdk\Model\TransactionPending;
-use Wallee\Sdk\Service\TransactionInvoiceService;
 use Wle\Wallee\Core\WalleeModule;
 use \Wallee\Sdk\Service\TransactionService as SdkTransactionService;
 use \Wallee\Sdk\Service\TransactionIframeService;
+use Wallee\Sdk\Service\TransactionInvoiceService;
+use Wallee\Sdk\Service\TransactionLineItemVersionService;
 use \Wallee\Sdk\Service\TransactionPaymentPageService;
 
 /**
@@ -34,12 +35,20 @@ class TransactionService extends AbstractService {
 	private $invoiceService;
 	private $paymentPageService;
 	private $iframeService;
+	private $transactionLineItemVersionService;
 
 	protected function getService(){
 		if (!$this->service) {
 			$this->service = new SdkTransactionService(WalleeModule::instance()->getApiClient());
 		}
 		return $this->service;
+	}
+
+	protected function getTransactionLineItemVersionService(){
+	    if (!$this->transactionLineItemVersionService) {
+		$this->transactionLineItemVersionService = new TransactionLineItemVersionService(WalleeModule::instance()->getApiClient());
+	    }
+	    return $this->transactionLineItemVersionService;
 	}
 
 	/**
@@ -142,9 +151,18 @@ class TransactionService extends AbstractService {
 			return $this->getService()->update(WalleeModule::settings()->getSpaceId(), $transaction);
 		}
 	}
-
-	public function updateLineItems($spaceId, TransactionLineItemUpdateRequest $updateRequest){
-		return $this->getService()->updateTransactionLineItems($spaceId, $updateRequest);
+	/**
+	* Create a version of line items
+	*
+	* @param string $spaceId
+	* @param \Wallee\Sdk\Model\TransactionLineItemVersionCreate $lineItemVersion
+	* @return \Wallee\Sdk\Model\TransactionLineItemVersion
+	* @throws \Wallee\Sdk\ApiException
+	* @throws \Wallee\Sdk\Http\ConnectionException
+	* @throws \Wallee\Sdk\VersioningException 
+	*/
+	public function updateLineItems($spaceId, TransactionLineItemVersionCreate $lineItemVersion){
+		return $this->getTransactionLineItemVersionService()->create($spaceId, $lineItemVersion);
 	}
 
 	/**

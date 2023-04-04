@@ -47,11 +47,7 @@ class ShopifySubscriptionAddress extends Address
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'city' => 'string',
-        'country' => 'string',
-        'family_name' => 'string',
-        'postcode' => 'string',
-        'street' => 'string'
+        
     ];
 
     /**
@@ -60,11 +56,7 @@ class ShopifySubscriptionAddress extends Address
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'city' => null,
-        'country' => null,
-        'family_name' => null,
-        'postcode' => null,
-        'street' => null
+        
     ];
 
     /**
@@ -74,11 +66,7 @@ class ShopifySubscriptionAddress extends Address
      * @var string[]
      */
     protected static $attributeMap = [
-        'city' => 'city',
-        'country' => 'country',
-        'family_name' => 'familyName',
-        'postcode' => 'postcode',
-        'street' => 'street'
+        
     ];
 
     /**
@@ -87,11 +75,7 @@ class ShopifySubscriptionAddress extends Address
      * @var string[]
      */
     protected static $setters = [
-        'city' => 'setCity',
-        'country' => 'setCountry',
-        'family_name' => 'setFamilyName',
-        'postcode' => 'setPostcode',
-        'street' => 'setStreet'
+        
     ];
 
     /**
@@ -100,11 +84,7 @@ class ShopifySubscriptionAddress extends Address
      * @var string[]
      */
     protected static $getters = [
-        'city' => 'getCity',
-        'country' => 'getCountry',
-        'family_name' => 'getFamilyName',
-        'postcode' => 'getPostcode',
-        'street' => 'getStreet'
+        
     ];
 
     
@@ -121,16 +101,6 @@ class ShopifySubscriptionAddress extends Address
         parent::__construct($data);
 
         
-        $this->container['city'] = isset($data['city']) ? $data['city'] : null;
-        
-        $this->container['country'] = isset($data['country']) ? $data['country'] : null;
-        
-        $this->container['family_name'] = isset($data['family_name']) ? $data['family_name'] : null;
-        
-        $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
-        
-        $this->container['street'] = isset($data['street']) ? $data['street'] : null;
-        
     }
 
     /**
@@ -141,6 +111,50 @@ class ShopifySubscriptionAddress extends Address
     public function listInvalidProperties()
     {
         $invalidProperties = parent::listInvalidProperties();
+
+        if (!is_null($this->container['commercial_register_number']) && (mb_strlen($this->container['commercial_register_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'commercial_register_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['dependent_locality']) && (mb_strlen($this->container['dependent_locality']) > 100)) {
+            $invalidProperties[] = "invalid value for 'dependent_locality', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['email_address']) && (mb_strlen($this->container['email_address']) > 254)) {
+            $invalidProperties[] = "invalid value for 'email_address', the character length must be smaller than or equal to 254.";
+        }
+
+        if (!is_null($this->container['given_name']) && (mb_strlen($this->container['given_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'given_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['mobile_phone_number']) && (mb_strlen($this->container['mobile_phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'mobile_phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['organization_name']) && (mb_strlen($this->container['organization_name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'organization_name', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['phone_number']) && (mb_strlen($this->container['phone_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'phone_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['sales_tax_number']) && (mb_strlen($this->container['sales_tax_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sales_tax_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['salutation']) && (mb_strlen($this->container['salutation']) > 20)) {
+            $invalidProperties[] = "invalid value for 'salutation', the character length must be smaller than or equal to 20.";
+        }
+
+        if (!is_null($this->container['social_security_number']) && (mb_strlen($this->container['social_security_number']) > 100)) {
+            $invalidProperties[] = "invalid value for 'social_security_number', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['sorting_code']) && (mb_strlen($this->container['sorting_code']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sorting_code', the character length must be smaller than or equal to 100.";
+        }
 
         return $invalidProperties;
     }
@@ -221,131 +235,6 @@ class ShopifySubscriptionAddress extends Address
     }
 
     
-
-    /**
-     * Gets city
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->container['city'];
-    }
-
-    /**
-     * Sets city
-     *
-     * @param string $city 
-     *
-     * @return $this
-     */
-    public function setCity($city)
-    {
-        $this->container['city'] = $city;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets country
-     *
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->container['country'];
-    }
-
-    /**
-     * Sets country
-     *
-     * @param string $country 
-     *
-     * @return $this
-     */
-    public function setCountry($country)
-    {
-        $this->container['country'] = $country;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets family_name
-     *
-     * @return string
-     */
-    public function getFamilyName()
-    {
-        return $this->container['family_name'];
-    }
-
-    /**
-     * Sets family_name
-     *
-     * @param string $family_name 
-     *
-     * @return $this
-     */
-    public function setFamilyName($family_name)
-    {
-        $this->container['family_name'] = $family_name;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets postcode
-     *
-     * @return string
-     */
-    public function getPostcode()
-    {
-        return $this->container['postcode'];
-    }
-
-    /**
-     * Sets postcode
-     *
-     * @param string $postcode 
-     *
-     * @return $this
-     */
-    public function setPostcode($postcode)
-    {
-        $this->container['postcode'] = $postcode;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets street
-     *
-     * @return string
-     */
-    public function getStreet()
-    {
-        return $this->container['street'];
-    }
-
-    /**
-     * Sets street
-     *
-     * @param string $street 
-     *
-     * @return $this
-     */
-    public function setStreet($street)
-    {
-        $this->container['street'] = $street;
-
-        return $this;
-    }
-    
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -353,6 +242,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -365,6 +255,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -378,6 +269,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -394,6 +286,7 @@ class ShopifySubscriptionAddress extends Address
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

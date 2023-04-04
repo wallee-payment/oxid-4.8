@@ -40,11 +40,17 @@ final class ApiClientTest extends TestCase
      * @var Wallee\Sdk\ApiClient
      */
     protected $apiClient;
+    
+    /**
+     * @var int
+     */
+    private $spaceId = 405;
 
     /**
      * Setup before running each test case
+     * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $userId          = getenv('APPLICATION_USER_ID') ? getenv('APPLICATION_USER_ID') : 512;
@@ -58,8 +64,9 @@ final class ApiClientTest extends TestCase
 
     /**
      * Clean up after running each test case
+     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->apiClient = null;
     }
@@ -101,8 +108,46 @@ final class ApiClientTest extends TestCase
     public function testEnvClient()
     {
         putenv('WLE_HTTP_CLIENT=' . HttpClientFactory::TYPE_CURL);
-        echo getenv('WLE_HTTP_CLIENT') . PHP_EOL;
-        $this->callApi();
+        $this->assertEquals(HttpClientFactory::getClient(HttpClientFactory::TYPE_CURL), HttpClientFactory::getClient());
+        
+        putenv('WLE_HTTP_CLIENT=' . HttpClientFactory::TYPE_SOCKET);
+        $this->assertEquals(HttpClientFactory::getClient(HttpClientFactory::TYPE_SOCKET), HttpClientFactory::getClient());
+    }
+    
+    /**
+     * Test case for an empty response
+     */
+    public function testEmptyResponseWithSocketClient()
+    {
+    	$this->apiClient->setHttpClientType(HttpClientFactory::TYPE_SOCKET);
+    	$this->apiClient->getTransactionService()->read($this->spaceId, 1);
+    }
+    
+    /**
+     * Test case for an empty response
+     */
+    public function testEmptyResponseWithCurlClient()
+    {
+    	$this->apiClient->setHttpClientType(HttpClientFactory::TYPE_CURL);
+    	$this->apiClient->getTransactionService()->read($this->spaceId, 1);
+    }
+
+    /**
+     * Tests that the headers in the response contain headers with SDK information by default.
+     *
+     * @since 3.1.2
+     * @return void
+     */
+    public function testSdkHeaders()
+    {
+        $headers = $this->apiClient->getDefaultHeaders();
+        $this->assertGreaterThanOrEqual(4, count($headers));
+
+        // Check SDK default header values.
+        $this->assertEquals($headers['x-meta-sdk-version'], "3.2.0");
+        $this->assertEquals($headers['x-meta-sdk-language'], 'php');
+        $this->assertEquals($headers['x-meta-sdk-provider'], "wallee");
+        $this->assertEquals($headers['x-meta-sdk-language-version'], phpversion());
     }
 
 }

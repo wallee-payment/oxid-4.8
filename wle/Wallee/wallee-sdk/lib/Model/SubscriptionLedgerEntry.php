@@ -54,6 +54,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'amount_including_tax' => 'float',
         'created_by' => 'int',
         'created_on' => '\DateTime',
+        'discount_including_tax' => 'float',
         'external_id' => 'string',
         'id' => 'int',
         'linked_space_id' => 'int',
@@ -78,6 +79,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'amount_including_tax' => null,
         'created_by' => 'int64',
         'created_on' => 'date-time',
+        'discount_including_tax' => null,
         'external_id' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
@@ -103,6 +105,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'amount_including_tax' => 'amountIncludingTax',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
+        'discount_including_tax' => 'discountIncludingTax',
         'external_id' => 'externalId',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
@@ -127,6 +130,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'amount_including_tax' => 'setAmountIncludingTax',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
+        'discount_including_tax' => 'setDiscountIncludingTax',
         'external_id' => 'setExternalId',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
@@ -151,6 +155,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         'amount_including_tax' => 'getAmountIncludingTax',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
+        'discount_including_tax' => 'getDiscountIncludingTax',
         'external_id' => 'getExternalId',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
@@ -191,6 +196,8 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
         $this->container['created_by'] = isset($data['created_by']) ? $data['created_by'] : null;
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
+        
+        $this->container['discount_including_tax'] = isset($data['discount_including_tax']) ? $data['discount_including_tax'] : null;
         
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
@@ -426,13 +433,38 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     * @param \DateTime $created_on The date and time when the object was created.
      *
      * @return $this
      */
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets discount_including_tax
+     *
+     * @return float
+     */
+    public function getDiscountIncludingTax()
+    {
+        return $this->container['discount_including_tax'];
+    }
+
+    /**
+     * Sets discount_including_tax
+     *
+     * @param float $discount_including_tax 
+     *
+     * @return $this
+     */
+    public function setDiscountIncludingTax($discount_including_tax)
+    {
+        $this->container['discount_including_tax'] = $discount_including_tax;
 
         return $this;
     }
@@ -451,7 +483,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets external_id
      *
-     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
      *
      * @return $this
      */
@@ -476,7 +508,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -501,7 +533,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -526,7 +558,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -576,7 +608,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntryState $state 
+     * @param \Wallee\Sdk\Model\SubscriptionLedgerEntryState $state The object's current state.
      *
      * @return $this
      */
@@ -708,7 +740,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
@@ -726,6 +758,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -738,6 +771,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -751,6 +785,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -767,6 +802,7 @@ class SubscriptionLedgerEntry implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

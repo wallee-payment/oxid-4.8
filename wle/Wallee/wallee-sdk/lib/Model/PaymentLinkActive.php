@@ -114,6 +114,16 @@ class PaymentLinkActive extends PaymentLinkUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
+
         return $invalidProperties;
     }
 
@@ -207,7 +217,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state 
+     * @param \Wallee\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */
@@ -225,6 +235,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -237,6 +248,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -250,6 +262,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -266,6 +279,7 @@ class PaymentLinkActive extends PaymentLinkUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

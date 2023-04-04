@@ -128,6 +128,10 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
+        }
+
         if ($this->container['entity'] === null) {
             $invalidProperties[] = "'entity' can't be null";
         }
@@ -295,6 +299,7 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -307,6 +312,7 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -320,6 +326,7 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -336,6 +343,7 @@ class WebhookListenerCreate extends AbstractWebhookListenerUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

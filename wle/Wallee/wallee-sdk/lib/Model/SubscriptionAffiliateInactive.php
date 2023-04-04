@@ -112,6 +112,20 @@ class SubscriptionAffiliateInactive extends SubscriptionAffiliateUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 255)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
+        }
+
         return $invalidProperties;
     }
 
@@ -198,6 +212,7 @@ class SubscriptionAffiliateInactive extends SubscriptionAffiliateUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -210,6 +225,7 @@ class SubscriptionAffiliateInactive extends SubscriptionAffiliateUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -223,6 +239,7 @@ class SubscriptionAffiliateInactive extends SubscriptionAffiliateUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -239,6 +256,7 @@ class SubscriptionAffiliateInactive extends SubscriptionAffiliateUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

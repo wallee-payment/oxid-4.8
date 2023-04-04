@@ -49,9 +49,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'contact_address' => '\Wallee\Sdk\Model\PaymentTerminalContactAddress',
-        'default_configuration' => '\Wallee\Sdk\Model\PaymentTerminalConfiguration',
-        'delivery_address' => '\Wallee\Sdk\Model\PaymentTerminalAddress',
+        'external_id' => 'string',
         'id' => 'int',
         'linked_space_id' => 'int',
         'name' => 'string',
@@ -66,9 +64,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'contact_address' => null,
-        'default_configuration' => null,
-        'delivery_address' => null,
+        'external_id' => null,
         'id' => 'int64',
         'linked_space_id' => 'int64',
         'name' => null,
@@ -84,9 +80,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'contact_address' => 'contactAddress',
-        'default_configuration' => 'defaultConfiguration',
-        'delivery_address' => 'deliveryAddress',
+        'external_id' => 'externalId',
         'id' => 'id',
         'linked_space_id' => 'linkedSpaceId',
         'name' => 'name',
@@ -101,9 +95,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'contact_address' => 'setContactAddress',
-        'default_configuration' => 'setDefaultConfiguration',
-        'delivery_address' => 'setDeliveryAddress',
+        'external_id' => 'setExternalId',
         'id' => 'setId',
         'linked_space_id' => 'setLinkedSpaceId',
         'name' => 'setName',
@@ -118,9 +110,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'contact_address' => 'getContactAddress',
-        'default_configuration' => 'getDefaultConfiguration',
-        'delivery_address' => 'getDeliveryAddress',
+        'external_id' => 'getExternalId',
         'id' => 'getId',
         'linked_space_id' => 'getLinkedSpaceId',
         'name' => 'getName',
@@ -147,11 +137,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['contact_address'] = isset($data['contact_address']) ? $data['contact_address'] : null;
-        
-        $this->container['default_configuration'] = isset($data['default_configuration']) ? $data['default_configuration'] : null;
-        
-        $this->container['delivery_address'] = isset($data['delivery_address']) ? $data['delivery_address'] : null;
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         
@@ -261,75 +247,25 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets contact_address
+     * Gets external_id
      *
-     * @return \Wallee\Sdk\Model\PaymentTerminalContactAddress
+     * @return string
      */
-    public function getContactAddress()
+    public function getExternalId()
     {
-        return $this->container['contact_address'];
+        return $this->container['external_id'];
     }
 
     /**
-     * Sets contact_address
+     * Sets external_id
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalContactAddress $contact_address 
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
      *
      * @return $this
      */
-    public function setContactAddress($contact_address)
+    public function setExternalId($external_id)
     {
-        $this->container['contact_address'] = $contact_address;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets default_configuration
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalConfiguration
-     */
-    public function getDefaultConfiguration()
-    {
-        return $this->container['default_configuration'];
-    }
-
-    /**
-     * Sets default_configuration
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalConfiguration $default_configuration 
-     *
-     * @return $this
-     */
-    public function setDefaultConfiguration($default_configuration)
-    {
-        $this->container['default_configuration'] = $default_configuration;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets delivery_address
-     *
-     * @return \Wallee\Sdk\Model\PaymentTerminalAddress
-     */
-    public function getDeliveryAddress()
-    {
-        return $this->container['delivery_address'];
-    }
-
-    /**
-     * Sets delivery_address
-     *
-     * @param \Wallee\Sdk\Model\PaymentTerminalAddress $delivery_address 
-     *
-     * @return $this
-     */
-    public function setDeliveryAddress($delivery_address)
-    {
-        $this->container['delivery_address'] = $delivery_address;
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
@@ -348,7 +284,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -373,7 +309,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -427,7 +363,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -452,7 +388,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\PaymentTerminalLocationState $state 
+     * @param \Wallee\Sdk\Model\PaymentTerminalLocationState $state The object's current state.
      *
      * @return $this
      */
@@ -477,7 +413,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
@@ -495,6 +431,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -507,6 +444,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -520,6 +458,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -536,6 +475,7 @@ class PaymentTerminalLocation implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

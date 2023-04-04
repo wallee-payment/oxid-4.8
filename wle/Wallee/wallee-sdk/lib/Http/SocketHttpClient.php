@@ -80,7 +80,7 @@ final class SocketHttpClient implements IHttpClient {
 		$responseMessage = '';
 		$chunked = false;
 		$chunkLength = false;
-		$maxTime = $this->getStartTime() + $apiClient->getConnectionTimeout();
+		$maxTime = $this->getStartTime() + $request->getTimeOut();
 		$contentLength = -1;
 		$endReached = false;
 		while ($maxTime > time() && !feof($socket) && !$endReached) {
@@ -103,6 +103,11 @@ final class SocketHttpClient implements IHttpClient {
 				}
 				$responseMessage .= $line;
 			} else {
+				// If the content of the response is empty, there is nothing to be read.
+				if ($contentLength == 0) {
+                    $endReached = true;
+                    break;
+                }
 				// Check if we can read without chunks
 				if (!$chunked) {
 					$readBytes = 4096;

@@ -51,7 +51,6 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'checkout_token' => 'string',
         'created_on' => '\DateTime',
         'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
-        'linked_space_id' => 'int',
         'order_id' => 'string',
         'order_name' => 'string',
         'planned_execution_date' => '\DateTime',
@@ -74,7 +73,6 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'checkout_token' => null,
         'created_on' => 'date-time',
         'failure_reason' => null,
-        'linked_space_id' => 'int64',
         'order_id' => null,
         'order_name' => null,
         'planned_execution_date' => 'date-time',
@@ -98,7 +96,6 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'checkout_token' => 'checkoutToken',
         'created_on' => 'createdOn',
         'failure_reason' => 'failureReason',
-        'linked_space_id' => 'linkedSpaceId',
         'order_id' => 'orderId',
         'order_name' => 'orderName',
         'planned_execution_date' => 'plannedExecutionDate',
@@ -121,7 +118,6 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'checkout_token' => 'setCheckoutToken',
         'created_on' => 'setCreatedOn',
         'failure_reason' => 'setFailureReason',
-        'linked_space_id' => 'setLinkedSpaceId',
         'order_id' => 'setOrderId',
         'order_name' => 'setOrderName',
         'planned_execution_date' => 'setPlannedExecutionDate',
@@ -144,7 +140,6 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         'checkout_token' => 'getCheckoutToken',
         'created_on' => 'getCreatedOn',
         'failure_reason' => 'getFailureReason',
-        'linked_space_id' => 'getLinkedSpaceId',
         'order_id' => 'getOrderId',
         'order_name' => 'getOrderName',
         'planned_execution_date' => 'getPlannedExecutionDate',
@@ -178,8 +173,6 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
         $this->container['failure_reason'] = isset($data['failure_reason']) ? $data['failure_reason'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['order_id'] = isset($data['order_id']) ? $data['order_id'] : null;
         
@@ -393,31 +386,6 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
     
 
     /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
-
-        return $this;
-    }
-    
-
-    /**
      * Gets order_id
      *
      * @return string
@@ -505,7 +473,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -605,7 +573,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\ShopifyRecurringOrderState $state 
+     * @param \Wallee\Sdk\Model\ShopifyRecurringOrderState $state The object's current state.
      *
      * @return $this
      */
@@ -673,6 +641,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -685,6 +654,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -698,6 +668,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -714,6 +685,7 @@ class ShopifyRecurringOrder extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

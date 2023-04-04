@@ -112,6 +112,12 @@ class SubscriptionMetricActive extends SubscriptionMetricUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -198,6 +204,7 @@ class SubscriptionMetricActive extends SubscriptionMetricUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -210,6 +217,7 @@ class SubscriptionMetricActive extends SubscriptionMetricUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -223,6 +231,7 @@ class SubscriptionMetricActive extends SubscriptionMetricUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -239,6 +248,7 @@ class SubscriptionMetricActive extends SubscriptionMetricUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

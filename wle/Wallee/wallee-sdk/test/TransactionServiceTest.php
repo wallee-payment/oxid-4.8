@@ -73,8 +73,9 @@ class TransactionServiceTest extends TestCase
 
     /**
      * Setup before running each test case
+     * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -116,6 +117,7 @@ class TransactionServiceTest extends TestCase
             $this->transactionPayload->setAutoConfirmationEnabled(true);
             $this->transactionPayload->setBillingAddress($billingAddress);
             $this->transactionPayload->setShippingAddress($billingAddress);
+            $this->transactionPayload->setToken(767);
         }
         return $this->transactionPayload;
     }
@@ -150,15 +152,17 @@ class TransactionServiceTest extends TestCase
 
     /**
      * Clean up after running each test case
+     * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
     /**
      * Clean up after running all test cases
+     * @return void
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
     }
 

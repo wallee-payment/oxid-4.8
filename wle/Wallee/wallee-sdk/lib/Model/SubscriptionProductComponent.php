@@ -304,7 +304,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
     /**
      * Sets component_change_weight
      *
-     * @param int $component_change_weight The change weight determines whether if a component change is considered as upgrade or downgrade. If product component with a weight 10 is changed to a product component with a weight 20, the change is considered as upgrade. On the other hand a change from 20 to 10 is considered as a downgrade.
+     * @param int $component_change_weight If a product component changes from one with a lower product component tier (e.g. 1) to one with a higher product component tier (e.g. 3), it is considered an upgrade and a one-time fee could be applied.
      *
      * @return $this
      */
@@ -354,7 +354,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
     /**
      * Sets default_component
      *
-     * @param bool $default_component When a component is marked as a 'default' component it is used when no other component is selected by the user.
+     * @param bool $default_component When a component is marked as a 'default' component it is used as the default component in its group and will be preselected in the product configuration.
      *
      * @return $this
      */
@@ -404,7 +404,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -429,7 +429,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -629,7 +629,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
@@ -647,6 +647,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -659,6 +660,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -672,6 +674,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -688,6 +691,7 @@ class SubscriptionProductComponent implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

@@ -53,6 +53,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'int',
         'billing_interval_amount' => 'int',
         'billing_interval_unit' => '\Wallee\Sdk\Model\ShopifySubscriptionBillingIntervalUnit',
+        'billing_reference_date' => '\DateTime',
         'billing_weekday' => '\Wallee\Sdk\Model\ShopifySubscriptionWeekday',
         'created_by' => 'int',
         'created_on' => '\DateTime',
@@ -88,6 +89,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'int32',
         'billing_interval_amount' => 'int32',
         'billing_interval_unit' => null,
+        'billing_reference_date' => 'date-time',
         'billing_weekday' => null,
         'created_by' => 'int64',
         'created_on' => 'date-time',
@@ -124,6 +126,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'billingDayOfMonth',
         'billing_interval_amount' => 'billingIntervalAmount',
         'billing_interval_unit' => 'billingIntervalUnit',
+        'billing_reference_date' => 'billingReferenceDate',
         'billing_weekday' => 'billingWeekday',
         'created_by' => 'createdBy',
         'created_on' => 'createdOn',
@@ -159,6 +162,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'setBillingDayOfMonth',
         'billing_interval_amount' => 'setBillingIntervalAmount',
         'billing_interval_unit' => 'setBillingIntervalUnit',
+        'billing_reference_date' => 'setBillingReferenceDate',
         'billing_weekday' => 'setBillingWeekday',
         'created_by' => 'setCreatedBy',
         'created_on' => 'setCreatedOn',
@@ -194,6 +198,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         'billing_day_of_month' => 'getBillingDayOfMonth',
         'billing_interval_amount' => 'getBillingIntervalAmount',
         'billing_interval_unit' => 'getBillingIntervalUnit',
+        'billing_reference_date' => 'getBillingReferenceDate',
         'billing_weekday' => 'getBillingWeekday',
         'created_by' => 'getCreatedBy',
         'created_on' => 'getCreatedOn',
@@ -244,6 +249,8 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
         $this->container['billing_interval_amount'] = isset($data['billing_interval_amount']) ? $data['billing_interval_amount'] : null;
         
         $this->container['billing_interval_unit'] = isset($data['billing_interval_unit']) ? $data['billing_interval_unit'] : null;
+        
+        $this->container['billing_reference_date'] = isset($data['billing_reference_date']) ? $data['billing_reference_date'] : null;
         
         $this->container['billing_weekday'] = isset($data['billing_weekday']) ? $data['billing_weekday'] : null;
         
@@ -483,6 +490,31 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
     
 
     /**
+     * Gets billing_reference_date
+     *
+     * @return \DateTime
+     */
+    public function getBillingReferenceDate()
+    {
+        return $this->container['billing_reference_date'];
+    }
+
+    /**
+     * Sets billing_reference_date
+     *
+     * @param \DateTime $billing_reference_date 
+     *
+     * @return $this
+     */
+    public function setBillingReferenceDate($billing_reference_date)
+    {
+        $this->container['billing_reference_date'] = $billing_reference_date;
+
+        return $this;
+    }
+    
+
+    /**
      * Gets billing_weekday
      *
      * @return \Wallee\Sdk\Model\ShopifySubscriptionWeekday
@@ -645,7 +677,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -695,7 +727,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -895,7 +927,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\ShopifySubscriptionVersionState $state 
+     * @param \Wallee\Sdk\Model\ShopifySubscriptionVersionState $state The object's current state.
      *
      * @return $this
      */
@@ -1045,7 +1077,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
@@ -1063,6 +1095,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -1075,6 +1108,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -1088,6 +1122,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -1104,6 +1139,7 @@ class ShopifySubscriptionVersion implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

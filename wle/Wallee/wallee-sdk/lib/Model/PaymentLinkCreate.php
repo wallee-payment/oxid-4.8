@@ -128,17 +128,13 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
+        }
+
         if ($this->container['external_id'] === null) {
             $invalidProperties[] = "'external_id' can't be null";
         }
-        if ((mb_strlen($this->container['external_id']) > 100)) {
-            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 100.";
-        }
-
-        if ((mb_strlen($this->container['external_id']) < 1)) {
-            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -232,7 +228,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\CreationEntityState $state 
+     * @param \Wallee\Sdk\Model\CreationEntityState $state The object's current state.
      *
      * @return $this
      */
@@ -257,19 +253,12 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
     /**
      * Sets external_id
      *
-     * @param string $external_id The external id helps to identify the entity and a subsequent creation of an entity with the same ID will not create a new entity.
+     * @param string $external_id A client generated nonce which identifies the entity to be created. Subsequent creation requests with the same external ID will not create new entities but return the initially created entity instead.
      *
      * @return $this
      */
     public function setExternalId($external_id)
     {
-        if ((mb_strlen($external_id) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentLinkCreate., must be smaller than or equal to 100.');
-        }
-        if ((mb_strlen($external_id) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentLinkCreate., must be bigger than or equal to 1.');
-        }
-
         $this->container['external_id'] = $external_id;
 
         return $this;
@@ -307,6 +296,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -319,6 +309,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -332,6 +323,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -348,6 +340,7 @@ class PaymentLinkCreate extends AbstractPaymentLinkUpdate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

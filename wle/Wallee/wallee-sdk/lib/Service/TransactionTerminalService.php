@@ -67,53 +67,42 @@ class TransactionTerminalService {
 
 
 	/**
-	 * Operation receipt
+	 * Operation fetchReceipts
 	 *
-	 * getTerminalReceipt
+	 * Fetch Receipts
 	 *
 	 * @param int $space_id  (required)
-	 * @param int $transaction_id The ID of the transaction to get the receipt for. (required)
-	 * @param int $type_id  (required)
-	 * @param int $width  (required)
+	 * @param \Wallee\Sdk\Model\TerminalReceiptFetchRequest $request  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
-	 * @return \Wallee\Sdk\Model\RenderedTerminalReceipt
+	 * @return \Wallee\Sdk\Model\RenderedTerminalReceipt[]
 	 */
-	public function receipt($space_id, $transaction_id, $type_id, $width) {
-		return $this->receiptWithHttpInfo($space_id, $transaction_id, $type_id, $width)->getData();
+	public function fetchReceipts($space_id, $request) {
+		return $this->fetchReceiptsWithHttpInfo($space_id, $request)->getData();
 	}
 
 	/**
-	 * Operation receiptWithHttpInfo
+	 * Operation fetchReceiptsWithHttpInfo
 	 *
-	 * getTerminalReceipt
-	 *
+	 * Fetch Receipts
+     
+     *
 	 * @param int $space_id  (required)
-	 * @param int $transaction_id The ID of the transaction to get the receipt for. (required)
-	 * @param int $type_id  (required)
-	 * @param int $width  (required)
+	 * @param \Wallee\Sdk\Model\TerminalReceiptFetchRequest $request  (required)
 	 * @throws \Wallee\Sdk\ApiException
 	 * @throws \Wallee\Sdk\VersioningException
 	 * @throws \Wallee\Sdk\Http\ConnectionException
 	 * @return ApiResponse
 	 */
-	public function receiptWithHttpInfo($space_id, $transaction_id, $type_id, $width) {
+	public function fetchReceiptsWithHttpInfo($space_id, $request) {
 		// verify the required parameter 'space_id' is set
 		if (is_null($space_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling receipt');
+			throw new \InvalidArgumentException('Missing the required parameter $space_id when calling fetchReceipts');
 		}
-		// verify the required parameter 'transaction_id' is set
-		if (is_null($transaction_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $transaction_id when calling receipt');
-		}
-		// verify the required parameter 'type_id' is set
-		if (is_null($type_id)) {
-			throw new \InvalidArgumentException('Missing the required parameter $type_id when calling receipt');
-		}
-		// verify the required parameter 'width' is set
-		if (is_null($width)) {
-			throw new \InvalidArgumentException('Missing the required parameter $width when calling receipt');
+		// verify the required parameter 'request' is set
+		if (is_null($request)) {
+			throw new \InvalidArgumentException('Missing the required parameter $request when calling fetchReceipts');
 		}
 		// header params
 		$headerParams = [];
@@ -121,31 +110,27 @@ class TransactionTerminalService {
 		if (!is_null($headerAccept)) {
 			$headerParams[HttpRequest::HEADER_KEY_ACCEPT] = $headerAccept;
 		}
-		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['*/*']);
+		$headerParams[HttpRequest::HEADER_KEY_CONTENT_TYPE] = $this->apiClient->selectHeaderContentType(['application/json;charset=utf-8']);
 
 		// query params
 		$queryParams = [];
 		if (!is_null($space_id)) {
 			$queryParams['spaceId'] = $this->apiClient->getSerializer()->toQueryValue($space_id);
 		}
-		if (!is_null($transaction_id)) {
-			$queryParams['transactionId'] = $this->apiClient->getSerializer()->toQueryValue($transaction_id);
-		}
-		if (!is_null($type_id)) {
-			$queryParams['typeId'] = $this->apiClient->getSerializer()->toQueryValue($type_id);
-		}
-		if (!is_null($width)) {
-			$queryParams['width'] = $this->apiClient->getSerializer()->toQueryValue($width);
-		}
 
 		// path params
-		$resourcePath = '/transaction-terminal/receipt';
+		$resourcePath = '/transaction-terminal/fetch-receipts';
 		// default format to json
 		$resourcePath = str_replace('{format}', 'json', $resourcePath);
 
 		// form params
 		$formParams = [];
-		
+		// body params
+		$tempBody = null;
+		if (isset($request)) {
+			$tempBody = $request;
+		}
+
 		// for model (json/xml)
 		$httpBody = '';
 		if (isset($tempBody)) {
@@ -155,23 +140,22 @@ class TransactionTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
-				'GET',
+				'POST',
 				$queryParams,
 				$httpBody,
 				$headerParams,
-				'\Wallee\Sdk\Model\RenderedTerminalReceipt',
-				'/transaction-terminal/receipt'
-			);
-			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RenderedTerminalReceipt', $response->getHeaders()));
+				'\Wallee\Sdk\Model\RenderedTerminalReceipt[]',
+				'/transaction-terminal/fetch-receipts'
+            );
+			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), '\Wallee\Sdk\Model\RenderedTerminalReceipt[]', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wallee\Sdk\Model\RenderedTerminalReceipt',
+                        '\Wallee\Sdk\Model\RenderedTerminalReceipt[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -219,7 +203,8 @@ class TransactionTerminalService {
 	 * Operation tillConnectionCredentialsWithHttpInfo
 	 *
 	 * Create Till Connection Credentials
-	 *
+     
+     *
 	 * @param int $space_id  (required)
 	 * @param int $transaction_id The ID of the transaction which is used to process with the terminal. (required)
 	 * @param int $terminal_id The ID of the terminal which should be used to process the transaction. (required)
@@ -282,7 +267,6 @@ class TransactionTerminalService {
 		}
 		// make the API Call
 		try {
-			$this->apiClient->setConnectionTimeout(ApiClient::CONNECTION_TIMEOUT);
 			$response = $this->apiClient->callApi(
 				$resourcePath,
 				'POST',
@@ -291,7 +275,7 @@ class TransactionTerminalService {
 				$headerParams,
 				'string',
 				'/transaction-terminal/till-connection-credentials'
-			);
+            );
 			return new ApiResponse($response->getStatusCode(), $response->getHeaders(), $this->apiClient->getSerializer()->deserialize($response->getData(), 'string', $response->getHeaders()));
 		} catch (ApiException $e) {
 			switch ($e->getCode()) {

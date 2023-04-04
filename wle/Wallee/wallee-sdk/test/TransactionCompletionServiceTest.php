@@ -67,8 +67,9 @@ class TransactionCompletionServiceTest extends TestCase
 
     /**
      * Setup before running each test case
+     * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         
@@ -137,6 +138,7 @@ class TransactionCompletionServiceTest extends TestCase
             $this->transactionPayload->setAutoConfirmationEnabled(true);
             $this->transactionPayload->setBillingAddress($billingAddress);
             $this->transactionPayload->setShippingAddress($billingAddress);
+            $this->transactionPayload->setToken(766);
         }
         return $this->transactionPayload;
     }
@@ -157,7 +159,7 @@ class TransactionCompletionServiceTest extends TestCase
 			if ($transaction->getState() == TransactionState::AUTHORIZED) {
 				break;
 			}
-			sleep($i * 30);
+			sleep($i * 5);
 			$transaction = $this->apiClient->getTransactionService()->read($this->spaceId, $transaction->getId());
 		}
 		if ($transaction->getState() == TransactionState::AUTHORIZED) {

@@ -51,6 +51,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => '\Wallee\Sdk\Model\TransactionCompletionBehavior',
         'connector_configuration' => '\Wallee\Sdk\Model\PaymentConnectorConfiguration',
         'created_on' => '\DateTime',
+        'customers_presence' => '\Wallee\Sdk\Model\CustomersPresence',
         'environment' => '\Wallee\Sdk\Model\ChargeAttemptEnvironment',
         'failed_on' => '\DateTime',
         'failure_reason' => '\Wallee\Sdk\Model\FailureReason',
@@ -58,7 +59,6 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => '\Wallee\Sdk\Model\ConnectorInvocation',
         'labels' => '\Wallee\Sdk\Model\Label[]',
         'language' => 'string',
-        'linked_space_id' => 'int',
         'next_update_on' => '\DateTime',
         'planned_purge_date' => '\DateTime',
         'redirection_url' => 'string',
@@ -71,7 +71,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => '\DateTime',
         'token_version' => '\Wallee\Sdk\Model\TokenVersion',
         'user_failure_message' => 'string',
-        'version' => 'int'
+        'version' => 'int',
+        'wallet_type' => '\Wallee\Sdk\Model\WalletType'
     ];
 
     /**
@@ -84,6 +85,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => null,
         'connector_configuration' => null,
         'created_on' => 'date-time',
+        'customers_presence' => null,
         'environment' => null,
         'failed_on' => 'date-time',
         'failure_reason' => null,
@@ -91,7 +93,6 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => null,
         'labels' => null,
         'language' => null,
-        'linked_space_id' => 'int64',
         'next_update_on' => 'date-time',
         'planned_purge_date' => 'date-time',
         'redirection_url' => null,
@@ -104,7 +105,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'date-time',
         'token_version' => null,
         'user_failure_message' => null,
-        'version' => 'int32'
+        'version' => 'int32',
+        'wallet_type' => null
     ];
 
     /**
@@ -118,6 +120,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => 'completionBehavior',
         'connector_configuration' => 'connectorConfiguration',
         'created_on' => 'createdOn',
+        'customers_presence' => 'customersPresence',
         'environment' => 'environment',
         'failed_on' => 'failedOn',
         'failure_reason' => 'failureReason',
@@ -125,7 +128,6 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => 'invocation',
         'labels' => 'labels',
         'language' => 'language',
-        'linked_space_id' => 'linkedSpaceId',
         'next_update_on' => 'nextUpdateOn',
         'planned_purge_date' => 'plannedPurgeDate',
         'redirection_url' => 'redirectionUrl',
@@ -138,7 +140,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'timeoutOn',
         'token_version' => 'tokenVersion',
         'user_failure_message' => 'userFailureMessage',
-        'version' => 'version'
+        'version' => 'version',
+        'wallet_type' => 'walletType'
     ];
 
     /**
@@ -151,6 +154,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => 'setCompletionBehavior',
         'connector_configuration' => 'setConnectorConfiguration',
         'created_on' => 'setCreatedOn',
+        'customers_presence' => 'setCustomersPresence',
         'environment' => 'setEnvironment',
         'failed_on' => 'setFailedOn',
         'failure_reason' => 'setFailureReason',
@@ -158,7 +162,6 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => 'setInvocation',
         'labels' => 'setLabels',
         'language' => 'setLanguage',
-        'linked_space_id' => 'setLinkedSpaceId',
         'next_update_on' => 'setNextUpdateOn',
         'planned_purge_date' => 'setPlannedPurgeDate',
         'redirection_url' => 'setRedirectionUrl',
@@ -171,7 +174,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'setTimeoutOn',
         'token_version' => 'setTokenVersion',
         'user_failure_message' => 'setUserFailureMessage',
-        'version' => 'setVersion'
+        'version' => 'setVersion',
+        'wallet_type' => 'setWalletType'
     ];
 
     /**
@@ -184,6 +188,7 @@ class ChargeAttempt extends TransactionAwareEntity
         'completion_behavior' => 'getCompletionBehavior',
         'connector_configuration' => 'getConnectorConfiguration',
         'created_on' => 'getCreatedOn',
+        'customers_presence' => 'getCustomersPresence',
         'environment' => 'getEnvironment',
         'failed_on' => 'getFailedOn',
         'failure_reason' => 'getFailureReason',
@@ -191,7 +196,6 @@ class ChargeAttempt extends TransactionAwareEntity
         'invocation' => 'getInvocation',
         'labels' => 'getLabels',
         'language' => 'getLanguage',
-        'linked_space_id' => 'getLinkedSpaceId',
         'next_update_on' => 'getNextUpdateOn',
         'planned_purge_date' => 'getPlannedPurgeDate',
         'redirection_url' => 'getRedirectionUrl',
@@ -204,7 +208,8 @@ class ChargeAttempt extends TransactionAwareEntity
         'timeout_on' => 'getTimeoutOn',
         'token_version' => 'getTokenVersion',
         'user_failure_message' => 'getUserFailureMessage',
-        'version' => 'getVersion'
+        'version' => 'getVersion',
+        'wallet_type' => 'getWalletType'
     ];
 
     
@@ -229,6 +234,8 @@ class ChargeAttempt extends TransactionAwareEntity
         
         $this->container['created_on'] = isset($data['created_on']) ? $data['created_on'] : null;
         
+        $this->container['customers_presence'] = isset($data['customers_presence']) ? $data['customers_presence'] : null;
+        
         $this->container['environment'] = isset($data['environment']) ? $data['environment'] : null;
         
         $this->container['failed_on'] = isset($data['failed_on']) ? $data['failed_on'] : null;
@@ -242,8 +249,6 @@ class ChargeAttempt extends TransactionAwareEntity
         $this->container['labels'] = isset($data['labels']) ? $data['labels'] : null;
         
         $this->container['language'] = isset($data['language']) ? $data['language'] : null;
-        
-        $this->container['linked_space_id'] = isset($data['linked_space_id']) ? $data['linked_space_id'] : null;
         
         $this->container['next_update_on'] = isset($data['next_update_on']) ? $data['next_update_on'] : null;
         
@@ -270,6 +275,8 @@ class ChargeAttempt extends TransactionAwareEntity
         $this->container['user_failure_message'] = isset($data['user_failure_message']) ? $data['user_failure_message'] : null;
         
         $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        
+        $this->container['wallet_type'] = isset($data['wallet_type']) ? $data['wallet_type'] : null;
         
     }
 
@@ -454,13 +461,38 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets created_on
      *
-     * @param \DateTime $created_on The created on date indicates the date on which the entity was stored into the database.
+     * @param \DateTime $created_on The date and time when the object was created.
      *
      * @return $this
      */
     public function setCreatedOn($created_on)
     {
         $this->container['created_on'] = $created_on;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets customers_presence
+     *
+     * @return \Wallee\Sdk\Model\CustomersPresence
+     */
+    public function getCustomersPresence()
+    {
+        return $this->container['customers_presence'];
+    }
+
+    /**
+     * Sets customers_presence
+     *
+     * @param \Wallee\Sdk\Model\CustomersPresence $customers_presence The customers presence indicates which kind of customer interaction was used during the charge attempt.
+     *
+     * @return $this
+     */
+    public function setCustomersPresence($customers_presence)
+    {
+        $this->container['customers_presence'] = $customers_presence;
 
         return $this;
     }
@@ -629,38 +661,13 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets language
      *
-     * @param string $language 
+     * @param string $language The language that is linked to the object.
      *
      * @return $this
      */
     public function setLanguage($language)
     {
         $this->container['language'] = $language;
-
-        return $this;
-    }
-    
-
-    /**
-     * Gets linked_space_id
-     *
-     * @return int
-     */
-    public function getLinkedSpaceId()
-    {
-        return $this->container['linked_space_id'];
-    }
-
-    /**
-     * Sets linked_space_id
-     *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
-     *
-     * @return $this
-     */
-    public function setLinkedSpaceId($linked_space_id)
-    {
-        $this->container['linked_space_id'] = $linked_space_id;
 
         return $this;
     }
@@ -704,7 +711,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
@@ -804,7 +811,7 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\ChargeAttemptState $state 
+     * @param \Wallee\Sdk\Model\ChargeAttemptState $state The object's current state.
      *
      * @return $this
      */
@@ -983,13 +990,38 @@ class ChargeAttempt extends TransactionAwareEntity
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
     public function setVersion($version)
     {
         $this->container['version'] = $version;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets wallet_type
+     *
+     * @return \Wallee\Sdk\Model\WalletType
+     */
+    public function getWalletType()
+    {
+        return $this->container['wallet_type'];
+    }
+
+    /**
+     * Sets wallet_type
+     *
+     * @param \Wallee\Sdk\Model\WalletType $wallet_type 
+     *
+     * @return $this
+     */
+    public function setWalletType($wallet_type)
+    {
+        $this->container['wallet_type'] = $wallet_type;
 
         return $this;
     }
@@ -1001,6 +1033,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -1013,6 +1046,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -1026,6 +1060,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -1042,6 +1077,7 @@ class ChargeAttempt extends TransactionAwareEntity
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

@@ -114,6 +114,10 @@ class TransactionCommentCreate extends AbstractTransactionCommentActive
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['content']) && (mb_strlen($this->container['content']) > 262144)) {
+            $invalidProperties[] = "invalid value for 'content', the character length must be smaller than or equal to 262144.";
+        }
+
         if ($this->container['transaction'] === null) {
             $invalidProperties[] = "'transaction' can't be null";
         }
@@ -228,6 +232,7 @@ class TransactionCommentCreate extends AbstractTransactionCommentActive
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -240,6 +245,7 @@ class TransactionCommentCreate extends AbstractTransactionCommentActive
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -253,6 +259,7 @@ class TransactionCommentCreate extends AbstractTransactionCommentActive
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -269,6 +276,7 @@ class TransactionCommentCreate extends AbstractTransactionCommentActive
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

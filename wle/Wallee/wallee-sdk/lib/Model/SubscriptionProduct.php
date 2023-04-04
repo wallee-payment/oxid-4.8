@@ -55,6 +55,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int',
         'name' => 'string',
         'planned_purge_date' => '\DateTime',
+        'product_locked' => 'bool',
         'reference' => 'string',
         'sort_order' => 'int',
         'space_id' => 'int',
@@ -74,6 +75,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
         'linked_space_id' => 'int64',
         'name' => null,
         'planned_purge_date' => 'date-time',
+        'product_locked' => null,
         'reference' => null,
         'sort_order' => 'int32',
         'space_id' => 'int64',
@@ -94,6 +96,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
         'linked_space_id' => 'linkedSpaceId',
         'name' => 'name',
         'planned_purge_date' => 'plannedPurgeDate',
+        'product_locked' => 'productLocked',
         'reference' => 'reference',
         'sort_order' => 'sortOrder',
         'space_id' => 'spaceId',
@@ -113,6 +116,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
         'linked_space_id' => 'setLinkedSpaceId',
         'name' => 'setName',
         'planned_purge_date' => 'setPlannedPurgeDate',
+        'product_locked' => 'setProductLocked',
         'reference' => 'setReference',
         'sort_order' => 'setSortOrder',
         'space_id' => 'setSpaceId',
@@ -132,6 +136,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
         'linked_space_id' => 'getLinkedSpaceId',
         'name' => 'getName',
         'planned_purge_date' => 'getPlannedPurgeDate',
+        'product_locked' => 'getProductLocked',
         'reference' => 'getReference',
         'sort_order' => 'getSortOrder',
         'space_id' => 'getSpaceId',
@@ -168,6 +173,8 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
         $this->container['planned_purge_date'] = isset($data['planned_purge_date']) ? $data['planned_purge_date'] : null;
+        
+        $this->container['product_locked'] = isset($data['product_locked']) ? $data['product_locked'] : null;
         
         $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
         
@@ -341,7 +348,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param int $id The ID is the primary key of the entity. The ID identifies the entity uniquely.
+     * @param int $id A unique identifier for the object.
      *
      * @return $this
      */
@@ -366,7 +373,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets linked_space_id
      *
-     * @param int $linked_space_id The linked space id holds the ID of the space to which the entity belongs to.
+     * @param int $linked_space_id The ID of the space this object belongs to.
      *
      * @return $this
      */
@@ -420,13 +427,38 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets planned_purge_date
      *
-     * @param \DateTime $planned_purge_date The planned purge date indicates when the entity is permanently removed. When the date is null the entity is not planned to be removed.
+     * @param \DateTime $planned_purge_date The date and time when the object is planned to be permanently removed. If the value is empty, the object will not be removed.
      *
      * @return $this
      */
     public function setPlannedPurgeDate($planned_purge_date)
     {
         $this->container['planned_purge_date'] = $planned_purge_date;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets product_locked
+     *
+     * @return bool
+     */
+    public function getProductLocked()
+    {
+        return $this->container['product_locked'];
+    }
+
+    /**
+     * Sets product_locked
+     *
+     * @param bool $product_locked Marks the product as locked. Meaning that customer can not change away from this product or change to this product later on.
+     *
+     * @return $this
+     */
+    public function setProductLocked($product_locked)
+    {
+        $this->container['product_locked'] = $product_locked;
 
         return $this;
     }
@@ -524,7 +556,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param \Wallee\Sdk\Model\SubscriptionProductState $state 
+     * @param \Wallee\Sdk\Model\SubscriptionProductState $state The object's current state.
      *
      * @return $this
      */
@@ -549,7 +581,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
     /**
      * Sets version
      *
-     * @param int $version The version number indicates the version of the entity. The version is incremented whenever the entity is changed.
+     * @param int $version The version is used for optimistic locking and incremented whenever the object is updated.
      *
      * @return $this
      */
@@ -567,6 +599,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -579,6 +612,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -592,6 +626,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -608,6 +643,7 @@ class SubscriptionProduct implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

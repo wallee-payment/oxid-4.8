@@ -24,15 +24,15 @@ use \ArrayAccess;
 use \Wallee\Sdk\ObjectSerializer;
 
 /**
- * UnencryptedCardData model
+ * PaymentAppProcessorCreationRequest model
  *
  * @category    Class
- * @description This model holds the card data in plain.
+ * @description 
  * @package     Wallee\Sdk
  * @author      customweb GmbH
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache License v2
  */
-class UnencryptedCardData implements ModelInterface, ArrayAccess
+class PaymentAppProcessorCreationRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -41,7 +41,7 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'UnencryptedCardData';
+    protected static $swaggerModelName = 'PaymentAppProcessorCreationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -49,10 +49,11 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'card_holder_name' => 'string',
-        'card_verification_code' => 'string',
-        'expiry_date' => 'string',
-        'primary_account_number' => 'string'
+        'documentation_url' => 'string',
+        'external_id' => 'string',
+        'name' => 'string',
+        'production_mode_url' => 'string',
+        'svg_icon' => 'string'
     ];
 
     /**
@@ -61,10 +62,11 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'card_holder_name' => null,
-        'card_verification_code' => null,
-        'expiry_date' => null,
-        'primary_account_number' => null
+        'documentation_url' => null,
+        'external_id' => null,
+        'name' => null,
+        'production_mode_url' => null,
+        'svg_icon' => null
     ];
 
     /**
@@ -74,10 +76,11 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'card_holder_name' => 'cardHolderName',
-        'card_verification_code' => 'cardVerificationCode',
-        'expiry_date' => 'expiryDate',
-        'primary_account_number' => 'primaryAccountNumber'
+        'documentation_url' => 'documentationUrl',
+        'external_id' => 'externalId',
+        'name' => 'name',
+        'production_mode_url' => 'productionModeUrl',
+        'svg_icon' => 'svgIcon'
     ];
 
     /**
@@ -86,10 +89,11 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'card_holder_name' => 'setCardHolderName',
-        'card_verification_code' => 'setCardVerificationCode',
-        'expiry_date' => 'setExpiryDate',
-        'primary_account_number' => 'setPrimaryAccountNumber'
+        'documentation_url' => 'setDocumentationUrl',
+        'external_id' => 'setExternalId',
+        'name' => 'setName',
+        'production_mode_url' => 'setProductionModeUrl',
+        'svg_icon' => 'setSvgIcon'
     ];
 
     /**
@@ -98,10 +102,11 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'card_holder_name' => 'getCardHolderName',
-        'card_verification_code' => 'getCardVerificationCode',
-        'expiry_date' => 'getExpiryDate',
-        'primary_account_number' => 'getPrimaryAccountNumber'
+        'documentation_url' => 'getDocumentationUrl',
+        'external_id' => 'getExternalId',
+        'name' => 'getName',
+        'production_mode_url' => 'getProductionModeUrl',
+        'svg_icon' => 'getSvgIcon'
     ];
 
     
@@ -122,13 +127,15 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         
-        $this->container['card_holder_name'] = isset($data['card_holder_name']) ? $data['card_holder_name'] : null;
+        $this->container['documentation_url'] = isset($data['documentation_url']) ? $data['documentation_url'] : null;
         
-        $this->container['card_verification_code'] = isset($data['card_verification_code']) ? $data['card_verification_code'] : null;
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         
-        $this->container['expiry_date'] = isset($data['expiry_date']) ? $data['expiry_date'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         
-        $this->container['primary_account_number'] = isset($data['primary_account_number']) ? $data['primary_account_number'] : null;
+        $this->container['production_mode_url'] = isset($data['production_mode_url']) ? $data['production_mode_url'] : null;
+        
+        $this->container['svg_icon'] = isset($data['svg_icon']) ? $data['svg_icon'] : null;
         
     }
 
@@ -141,24 +148,32 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['card_holder_name']) && (mb_strlen($this->container['card_holder_name']) > 100)) {
-            $invalidProperties[] = "invalid value for 'card_holder_name', the character length must be smaller than or equal to 100.";
+        if ($this->container['documentation_url'] === null) {
+            $invalidProperties[] = "'documentation_url' can't be null";
+        }
+        if ($this->container['external_id'] === null) {
+            $invalidProperties[] = "'external_id' can't be null";
+        }
+        if ((mb_strlen($this->container['external_id']) > 40)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be smaller than or equal to 40.";
         }
 
-        if (!is_null($this->container['card_verification_code']) && (mb_strlen($this->container['card_verification_code']) > 4)) {
-            $invalidProperties[] = "invalid value for 'card_verification_code', the character length must be smaller than or equal to 4.";
+        if ((mb_strlen($this->container['external_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'external_id', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['card_verification_code']) && (mb_strlen($this->container['card_verification_code']) < 3)) {
-            $invalidProperties[] = "invalid value for 'card_verification_code', the character length must be bigger than or equal to 3.";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ((mb_strlen($this->container['name']) > 100)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 100.";
         }
 
-        if (!is_null($this->container['primary_account_number']) && (mb_strlen($this->container['primary_account_number']) > 30)) {
-            $invalidProperties[] = "invalid value for 'primary_account_number', the character length must be smaller than or equal to 30.";
+        if ($this->container['svg_icon'] === null) {
+            $invalidProperties[] = "'svg_icon' can't be null";
         }
-
-        if (!is_null($this->container['primary_account_number']) && (mb_strlen($this->container['primary_account_number']) < 10)) {
-            $invalidProperties[] = "invalid value for 'primary_account_number', the character length must be bigger than or equal to 10.";
+        if ((mb_strlen($this->container['svg_icon']) > 10000)) {
+            $invalidProperties[] = "invalid value for 'svg_icon', the character length must be smaller than or equal to 10000.";
         }
 
         return $invalidProperties;
@@ -242,118 +257,140 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
     
 
     /**
-     * Gets card_holder_name
+     * Gets documentation_url
      *
      * @return string
      */
-    public function getCardHolderName()
+    public function getDocumentationUrl()
     {
-        return $this->container['card_holder_name'];
+        return $this->container['documentation_url'];
     }
 
     /**
-     * Sets card_holder_name
+     * Sets documentation_url
      *
-     * @param string $card_holder_name The card holder name is the name printed onto the card. It identifies the person who owns the card.
+     * @param string $documentation_url The documentation URL has to point to a description of how to configure and use the processor.
      *
      * @return $this
      */
-    public function setCardHolderName($card_holder_name)
+    public function setDocumentationUrl($documentation_url)
     {
-        if (!is_null($card_holder_name) && (mb_strlen($card_holder_name) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $card_holder_name when calling UnencryptedCardData., must be smaller than or equal to 100.');
-        }
-
-        $this->container['card_holder_name'] = $card_holder_name;
+        $this->container['documentation_url'] = $documentation_url;
 
         return $this;
     }
     
 
     /**
-     * Gets card_verification_code
+     * Gets external_id
      *
      * @return string
      */
-    public function getCardVerificationCode()
+    public function getExternalId()
     {
-        return $this->container['card_verification_code'];
+        return $this->container['external_id'];
     }
 
     /**
-     * Sets card_verification_code
+     * Sets external_id
      *
-     * @param string $card_verification_code The card verification code (CVC) is a 3 to 4 digit code typically printed on the back of the card. It helps to ensure that the card holder is authorizing the transaction. For card not-present transactions this field is optional.
+     * @param string $external_id The external ID identifies the processor within the external system. It has to be unique per space and for any subsequent update the same ID must be sent.
      *
      * @return $this
      */
-    public function setCardVerificationCode($card_verification_code)
+    public function setExternalId($external_id)
     {
-        if (!is_null($card_verification_code) && (mb_strlen($card_verification_code) > 4)) {
-            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling UnencryptedCardData., must be smaller than or equal to 4.');
+        if ((mb_strlen($external_id) > 40)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentAppProcessorCreationRequest., must be smaller than or equal to 40.');
         }
-        if (!is_null($card_verification_code) && (mb_strlen($card_verification_code) < 3)) {
-            throw new \InvalidArgumentException('invalid length for $card_verification_code when calling UnencryptedCardData., must be bigger than or equal to 3.');
+        if ((mb_strlen($external_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $external_id when calling PaymentAppProcessorCreationRequest., must be bigger than or equal to 1.');
         }
 
-        $this->container['card_verification_code'] = $card_verification_code;
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
     
 
     /**
-     * Gets expiry_date
+     * Gets name
      *
      * @return string
      */
-    public function getExpiryDate()
+    public function getName()
     {
-        return $this->container['expiry_date'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets expiry_date
+     * Sets name
      *
-     * @param string $expiry_date The card expiry date indicates when the card expires. The format is the format yyyy-mm where yyyy is the year (e.g. 2019) and the mm is the month (e.g. 09).
+     * @param string $name The name of the processor will be displayed within the user interfaces that the merchant is interacting with.
      *
      * @return $this
      */
-    public function setExpiryDate($expiry_date)
+    public function setName($name)
     {
-        $this->container['expiry_date'] = $expiry_date;
+        if ((mb_strlen($name) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling PaymentAppProcessorCreationRequest., must be smaller than or equal to 100.');
+        }
+
+        $this->container['name'] = $name;
 
         return $this;
     }
     
 
     /**
-     * Gets primary_account_number
+     * Gets production_mode_url
      *
      * @return string
      */
-    public function getPrimaryAccountNumber()
+    public function getProductionModeUrl()
     {
-        return $this->container['primary_account_number'];
+        return $this->container['production_mode_url'];
     }
 
     /**
-     * Sets primary_account_number
+     * Sets production_mode_url
      *
-     * @param string $primary_account_number The primary account number (PAN) identifies the card. The number is numeric and typically printed on the front of the card.
+     * @param string $production_mode_url The production mode URL has to point to a site on which the merchant can set up the production mode for the processor.
      *
      * @return $this
      */
-    public function setPrimaryAccountNumber($primary_account_number)
+    public function setProductionModeUrl($production_mode_url)
     {
-        if (!is_null($primary_account_number) && (mb_strlen($primary_account_number) > 30)) {
-            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling UnencryptedCardData., must be smaller than or equal to 30.');
-        }
-        if (!is_null($primary_account_number) && (mb_strlen($primary_account_number) < 10)) {
-            throw new \InvalidArgumentException('invalid length for $primary_account_number when calling UnencryptedCardData., must be bigger than or equal to 10.');
+        $this->container['production_mode_url'] = $production_mode_url;
+
+        return $this;
+    }
+    
+
+    /**
+     * Gets svg_icon
+     *
+     * @return string
+     */
+    public function getSvgIcon()
+    {
+        return $this->container['svg_icon'];
+    }
+
+    /**
+     * Sets svg_icon
+     *
+     * @param string $svg_icon The SVG icon will be displayed to the user to represent this processor.
+     *
+     * @return $this
+     */
+    public function setSvgIcon($svg_icon)
+    {
+        if ((mb_strlen($svg_icon) > 10000)) {
+            throw new \InvalidArgumentException('invalid length for $svg_icon when calling PaymentAppProcessorCreationRequest., must be smaller than or equal to 10000.');
         }
 
-        $this->container['primary_account_number'] = $primary_account_number;
+        $this->container['svg_icon'] = $svg_icon;
 
         return $this;
     }
@@ -365,6 +402,7 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -377,6 +415,7 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -390,6 +429,7 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -406,6 +446,7 @@ class UnencryptedCardData implements ModelInterface, ArrayAccess
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);

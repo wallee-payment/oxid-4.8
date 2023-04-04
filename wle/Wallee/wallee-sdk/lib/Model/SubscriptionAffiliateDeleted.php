@@ -112,6 +112,22 @@ class SubscriptionAffiliateDeleted extends SubscriptionAffiliate
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 255)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
+        }
+
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) > 100)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['reference']) && (mb_strlen($this->container['reference']) < 3)) {
+            $invalidProperties[] = "invalid value for 'reference', the character length must be bigger than or equal to 3.";
+        }
+
         return $invalidProperties;
     }
 
@@ -198,6 +214,7 @@ class SubscriptionAffiliateDeleted extends SubscriptionAffiliate
      *
      * @return boolean
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
@@ -210,6 +227,7 @@ class SubscriptionAffiliateDeleted extends SubscriptionAffiliate
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
@@ -223,6 +241,7 @@ class SubscriptionAffiliateDeleted extends SubscriptionAffiliate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -239,6 +258,7 @@ class SubscriptionAffiliateDeleted extends SubscriptionAffiliate
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
